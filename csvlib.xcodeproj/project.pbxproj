@@ -7,80 +7,284 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		23FA81652172A3B9006AC04E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81642172A3B9006AC04E /* main.cpp */; };
+		23FA818F2172A4E1006AC04E /* csv_tests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 23FA818E2172A4E1006AC04E /* csv_tests.mm */; };
+		23FA81942172A5B1006AC04E /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA816D2172A447006AC04E /* parser.cpp */; };
+		23FA81952172A5B1006AC04E /* DSFCSVParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81712172A450006AC04E /* DSFCSVParser.mm */; };
+		23FA81962172A5B1006AC04E /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81702172A44F006AC04E /* DataSource.cpp */; };
+		23FA81972172A5B1006AC04E /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81752172A450006AC04E /* DataSource.cpp */; };
+		23FA819E2172A62B006AC04E /* libicuio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA81992172A62B006AC04E /* libicuio.a */; };
+		23FA819F2172A62B006AC04E /* libicutu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819A2172A62B006AC04E /* libicutu.a */; };
+		23FA81A02172A62B006AC04E /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819B2172A62B006AC04E /* libicui18n.a */; };
+		23FA81A12172A62B006AC04E /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819C2172A62B006AC04E /* libicuuc.a */; };
+		23FA81A22172A62B006AC04E /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819D2172A62B006AC04E /* libicudata.a */; };
+		23FA81A92172A656006AC04E /* ford_escort.csv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81A42172A655006AC04E /* ford_escort.csv */; };
+		23FA81AA2172A656006AC04E /* korean.csv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81A52172A655006AC04E /* korean.csv */; };
+		23FA81AB2172A656006AC04E /* classification.csv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81A62172A655006AC04E /* classification.csv */; };
+		23FA81AC2172A656006AC04E /* simple_csv_utf8_bom.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81A72172A655006AC04E /* simple_csv_utf8_bom.tsv */; };
+		23FA81AD2172A656006AC04E /* orig.csv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81A82172A655006AC04E /* orig.csv */; };
+		23FA81E32172A7D6006AC04E /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819D2172A62B006AC04E /* libicudata.a */; };
+		23FA81E42172A7D6006AC04E /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819B2172A62B006AC04E /* libicui18n.a */; };
+		23FA81E52172A7D6006AC04E /* libicuio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA81992172A62B006AC04E /* libicuio.a */; };
+		23FA81E62172A7D6006AC04E /* libicutu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819A2172A62B006AC04E /* libicutu.a */; };
+		23FA81E72172A7D6006AC04E /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819C2172A62B006AC04E /* libicuuc.a */; };
+		23FA81E82172A7E8006AC04E /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA816D2172A447006AC04E /* parser.cpp */; };
+		23FA81E92172A7ED006AC04E /* DSFCSVParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81712172A450006AC04E /* DSFCSVParser.mm */; };
+		23FA81EA2172A7ED006AC04E /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81702172A44F006AC04E /* DataSource.cpp */; };
+		23FA81EB2172A7ED006AC04E /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81752172A450006AC04E /* DataSource.cpp */; };
+		23FA81EC2172A8CD006AC04E /* TabulaRasaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81832172A4A9006AC04E /* TabulaRasaData.swift */; };
+		23FA81ED2172A8CD006AC04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81842172A4A9006AC04E /* AppDelegate.swift */; };
+		23FA81EE2172A8CD006AC04E /* TabulaRasaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81852172A4A9006AC04E /* TabulaRasaTableViewController.swift */; };
+		23FA81EF2172A8D0006AC04E /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81812172A4A9006AC04E /* Document.swift */; };
+		23FA81F02172A8DA006AC04E /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23FA817D2172A4A9006AC04E /* Document.xib */; };
+		23FA81F12172A8DE006AC04E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23FA817F2172A4A9006AC04E /* MainMenu.xib */; };
+		23FA81F32172A91F006AC04E /* TabulaRasaTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23FA817B2172A4A9006AC04E /* TabulaRasaTableViewController.xib */; };
+		23FA81F92172B125006AC04E /* korean-small.csv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81F82172B125006AC04E /* korean-small.csv */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		23FA815F2172A3B9006AC04E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		23FA81612172A3B9006AC04E /* csvlib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = csvlib; sourceTree = BUILT_PRODUCTS_DIR; };
-		23FA81642172A3B9006AC04E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		236F3B652173051A00A5BB57 /* IDataSource.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IDataSource.hpp; sourceTree = "<group>"; };
+		23FA816D2172A447006AC04E /* parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = csvlib/csv/parser.cpp; sourceTree = SOURCE_ROOT; };
+		23FA816F2172A447006AC04E /* parser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = parser.hpp; path = csvlib/csv/parser.hpp; sourceTree = SOURCE_ROOT; };
+		23FA81702172A44F006AC04E /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataSource.cpp; path = csvlib/csv/datasource/icu/DataSource.cpp; sourceTree = SOURCE_ROOT; };
+		23FA81712172A450006AC04E /* DSFCSVParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DSFCSVParser.mm; path = csvlib/csv/objc/DSFCSVParser.mm; sourceTree = SOURCE_ROOT; };
+		23FA81722172A450006AC04E /* DSFCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFCSVParser.h; path = csvlib/csv/objc/DSFCSVParser.h; sourceTree = SOURCE_ROOT; };
+		23FA81732172A450006AC04E /* DataSource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DataSource.hpp; path = csvlib/csv/datasource/icu/DataSource.hpp; sourceTree = SOURCE_ROOT; };
+		23FA81742172A450006AC04E /* DataSource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DataSource.hpp; path = csvlib/csv/datasource/utf8/DataSource.hpp; sourceTree = SOURCE_ROOT; };
+		23FA81752172A450006AC04E /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataSource.cpp; path = csvlib/csv/datasource/utf8/DataSource.cpp; sourceTree = SOURCE_ROOT; };
+		23FA817B2172A4A9006AC04E /* TabulaRasaTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabulaRasaTableViewController.xib; sourceTree = "<group>"; };
+		23FA817C2172A4A9006AC04E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		23FA817E2172A4A9006AC04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		23FA81802172A4A9006AC04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		23FA81812172A4A9006AC04E /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		23FA81822172A4A9006AC04E /* Tabula_Rasa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tabula_Rasa.entitlements; sourceTree = "<group>"; };
+		23FA81832172A4A9006AC04E /* TabulaRasaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabulaRasaData.swift; sourceTree = "<group>"; };
+		23FA81842172A4A9006AC04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		23FA81852172A4A9006AC04E /* TabulaRasaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabulaRasaTableViewController.swift; sourceTree = "<group>"; };
+		23FA81862172A4A9006AC04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23FA81872172A4A9006AC04E /* Tabula-Rasa-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tabula-Rasa-Bridging-Header.h"; sourceTree = "<group>"; };
+		23FA818C2172A4E1006AC04E /* csv_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = csv_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		23FA818E2172A4E1006AC04E /* csv_tests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = csv_tests.mm; sourceTree = "<group>"; };
+		23FA81902172A4E1006AC04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23FA81992172A62B006AC04E /* libicuio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicuio.a; path = ../../../../../usr/local/Cellar/icu4c/62.1/lib/libicuio.a; sourceTree = "<group>"; };
+		23FA819A2172A62B006AC04E /* libicutu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicutu.a; path = ../../../../../usr/local/Cellar/icu4c/62.1/lib/libicutu.a; sourceTree = "<group>"; };
+		23FA819B2172A62B006AC04E /* libicui18n.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicui18n.a; path = ../../../../../usr/local/Cellar/icu4c/62.1/lib/libicui18n.a; sourceTree = "<group>"; };
+		23FA819C2172A62B006AC04E /* libicuuc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicuuc.a; path = ../../../../../usr/local/Cellar/icu4c/62.1/lib/libicuuc.a; sourceTree = "<group>"; };
+		23FA819D2172A62B006AC04E /* libicudata.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicudata.a; path = ../../../../../usr/local/Cellar/icu4c/62.1/lib/libicudata.a; sourceTree = "<group>"; };
+		23FA81A42172A655006AC04E /* ford_escort.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ford_escort.csv; sourceTree = "<group>"; };
+		23FA81A52172A655006AC04E /* korean.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = korean.csv; sourceTree = "<group>"; };
+		23FA81A62172A655006AC04E /* classification.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = classification.csv; sourceTree = "<group>"; };
+		23FA81A72172A655006AC04E /* simple_csv_utf8_bom.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simple_csv_utf8_bom.tsv; sourceTree = "<group>"; };
+		23FA81A82172A655006AC04E /* orig.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = orig.csv; sourceTree = "<group>"; };
+		23FA81C92172A70C006AC04E /* Tabula Rasa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tabula Rasa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23FA81F42172AC3D006AC04E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		23FA81F52172AC3D006AC04E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		23FA81F82172B125006AC04E /* korean-small.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "korean-small.csv"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		23FA815E2172A3B9006AC04E /* Frameworks */ = {
+		23FA81892172A4E1006AC04E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23FA819E2172A62B006AC04E /* libicuio.a in Frameworks */,
+				23FA819F2172A62B006AC04E /* libicutu.a in Frameworks */,
+				23FA81A02172A62B006AC04E /* libicui18n.a in Frameworks */,
+				23FA81A12172A62B006AC04E /* libicuuc.a in Frameworks */,
+				23FA81A22172A62B006AC04E /* libicudata.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23FA81C62172A70C006AC04E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23FA81E32172A7D6006AC04E /* libicudata.a in Frameworks */,
+				23FA81E42172A7D6006AC04E /* libicui18n.a in Frameworks */,
+				23FA81E52172A7D6006AC04E /* libicuio.a in Frameworks */,
+				23FA81E62172A7D6006AC04E /* libicutu.a in Frameworks */,
+				23FA81E72172A7D6006AC04E /* libicuuc.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		236F3B5F2172FBA200A5BB57 /* objc */ = {
+			isa = PBXGroup;
+			children = (
+				23FA81722172A450006AC04E /* DSFCSVParser.h */,
+				23FA81712172A450006AC04E /* DSFCSVParser.mm */,
+			);
+			path = objc;
+			sourceTree = "<group>";
+		};
+		236F3B62217302AC00A5BB57 /* icu */ = {
+			isa = PBXGroup;
+			children = (
+				23FA81702172A44F006AC04E /* DataSource.cpp */,
+				23FA81732172A450006AC04E /* DataSource.hpp */,
+			);
+			path = icu;
+			sourceTree = "<group>";
+		};
+		236F3B63217302B200A5BB57 /* utf8 */ = {
+			isa = PBXGroup;
+			children = (
+				23FA81752172A450006AC04E /* DataSource.cpp */,
+				23FA81742172A450006AC04E /* DataSource.hpp */,
+			);
+			path = utf8;
+			sourceTree = "<group>";
+		};
+		236F3B64217304CA00A5BB57 /* csv */ = {
+			isa = PBXGroup;
+			children = (
+				23FA816D2172A447006AC04E /* parser.cpp */,
+				23FA816F2172A447006AC04E /* parser.hpp */,
+				23FA816C2172A438006AC04E /* datasource */,
+				236F3B5F2172FBA200A5BB57 /* objc */,
+			);
+			path = csv;
+			sourceTree = "<group>";
+		};
 		23FA81582172A3B9006AC04E = {
 			isa = PBXGroup;
 			children = (
-				23FA81632172A3B9006AC04E /* csvlib */,
+				23FA81F42172AC3D006AC04E /* LICENSE */,
+				23FA81F52172AC3D006AC04E /* README.md */,
+				23FA816B2172A421006AC04E /* csvlib */,
+				23FA818D2172A4E1006AC04E /* csv_tests */,
+				23FA81792172A49B006AC04E /* tools */,
 				23FA81622172A3B9006AC04E /* Products */,
+				23FA81982172A62B006AC04E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		23FA81622172A3B9006AC04E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				23FA81612172A3B9006AC04E /* csvlib */,
+				23FA818C2172A4E1006AC04E /* csv_tests.xctest */,
+				23FA81C92172A70C006AC04E /* Tabula Rasa.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		23FA81632172A3B9006AC04E /* csvlib */ = {
+		23FA816B2172A421006AC04E /* csvlib */ = {
 			isa = PBXGroup;
 			children = (
-				23FA81642172A3B9006AC04E /* main.cpp */,
+				236F3B64217304CA00A5BB57 /* csv */,
 			);
 			path = csvlib;
+			sourceTree = "<group>";
+		};
+		23FA816C2172A438006AC04E /* datasource */ = {
+			isa = PBXGroup;
+			children = (
+				236F3B652173051A00A5BB57 /* IDataSource.hpp */,
+				236F3B63217302B200A5BB57 /* utf8 */,
+				236F3B62217302AC00A5BB57 /* icu */,
+			);
+			path = datasource;
+			sourceTree = "<group>";
+		};
+		23FA81792172A49B006AC04E /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				23FA817A2172A4A9006AC04E /* Tabula Rasa */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
+		23FA817A2172A4A9006AC04E /* Tabula Rasa */ = {
+			isa = PBXGroup;
+			children = (
+				23FA817B2172A4A9006AC04E /* TabulaRasaTableViewController.xib */,
+				23FA817C2172A4A9006AC04E /* Assets.xcassets */,
+				23FA817D2172A4A9006AC04E /* Document.xib */,
+				23FA817F2172A4A9006AC04E /* MainMenu.xib */,
+				23FA81812172A4A9006AC04E /* Document.swift */,
+				23FA81822172A4A9006AC04E /* Tabula_Rasa.entitlements */,
+				23FA81832172A4A9006AC04E /* TabulaRasaData.swift */,
+				23FA81842172A4A9006AC04E /* AppDelegate.swift */,
+				23FA81852172A4A9006AC04E /* TabulaRasaTableViewController.swift */,
+				23FA81862172A4A9006AC04E /* Info.plist */,
+				23FA81872172A4A9006AC04E /* Tabula-Rasa-Bridging-Header.h */,
+			);
+			name = "Tabula Rasa";
+			path = "tools/Tabula Rasa";
+			sourceTree = SOURCE_ROOT;
+		};
+		23FA818D2172A4E1006AC04E /* csv_tests */ = {
+			isa = PBXGroup;
+			children = (
+				23FA81A32172A655006AC04E /* resources */,
+				23FA818E2172A4E1006AC04E /* csv_tests.mm */,
+				23FA81902172A4E1006AC04E /* Info.plist */,
+			);
+			path = csv_tests;
+			sourceTree = "<group>";
+		};
+		23FA81982172A62B006AC04E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				23FA819D2172A62B006AC04E /* libicudata.a */,
+				23FA819B2172A62B006AC04E /* libicui18n.a */,
+				23FA81992172A62B006AC04E /* libicuio.a */,
+				23FA819A2172A62B006AC04E /* libicutu.a */,
+				23FA819C2172A62B006AC04E /* libicuuc.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		23FA81A32172A655006AC04E /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				23FA81A42172A655006AC04E /* ford_escort.csv */,
+				23FA81A52172A655006AC04E /* korean.csv */,
+				23FA81F82172B125006AC04E /* korean-small.csv */,
+				23FA81A62172A655006AC04E /* classification.csv */,
+				23FA81A72172A655006AC04E /* simple_csv_utf8_bom.tsv */,
+				23FA81A82172A655006AC04E /* orig.csv */,
+			);
+			path = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		23FA81602172A3B9006AC04E /* csvlib */ = {
+		23FA818B2172A4E1006AC04E /* csv_tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 23FA81682172A3B9006AC04E /* Build configuration list for PBXNativeTarget "csvlib" */;
+			buildConfigurationList = 23FA81912172A4E1006AC04E /* Build configuration list for PBXNativeTarget "csv_tests" */;
 			buildPhases = (
-				23FA815D2172A3B9006AC04E /* Sources */,
-				23FA815E2172A3B9006AC04E /* Frameworks */,
-				23FA815F2172A3B9006AC04E /* CopyFiles */,
+				23FA81882172A4E1006AC04E /* Sources */,
+				23FA81892172A4E1006AC04E /* Frameworks */,
+				23FA818A2172A4E1006AC04E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = csvlib;
-			productName = csvlib;
-			productReference = 23FA81612172A3B9006AC04E /* csvlib */;
-			productType = "com.apple.product-type.tool";
+			name = csv_tests;
+			productName = csv_tests;
+			productReference = 23FA818C2172A4E1006AC04E /* csv_tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		23FA81C82172A70C006AC04E /* Tabula Rasa */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23FA81D92172A70C006AC04E /* Build configuration list for PBXNativeTarget "Tabula Rasa" */;
+			buildPhases = (
+				23FA81C52172A70C006AC04E /* Sources */,
+				23FA81C62172A70C006AC04E /* Frameworks */,
+				23FA81C72172A70C006AC04E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Tabula Rasa";
+			productName = "Tabula Rasa";
+			productReference = 23FA81C92172A70C006AC04E /* Tabula Rasa.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -88,10 +292,14 @@
 		23FA81592172A3B9006AC04E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Darren Ford";
 				TargetAttributes = {
-					23FA81602172A3B9006AC04E = {
+					23FA818B2172A4E1006AC04E = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					23FA81C82172A70C006AC04E = {
 						CreatedOnToolsVersion = 10.0;
 					};
 				};
@@ -102,27 +310,93 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 23FA81582172A3B9006AC04E;
 			productRefGroup = 23FA81622172A3B9006AC04E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				23FA81602172A3B9006AC04E /* csvlib */,
+				23FA818B2172A4E1006AC04E /* csv_tests */,
+				23FA81C82172A70C006AC04E /* Tabula Rasa */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		23FA818A2172A4E1006AC04E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23FA81AB2172A656006AC04E /* classification.csv in Resources */,
+				23FA81AA2172A656006AC04E /* korean.csv in Resources */,
+				23FA81F92172B125006AC04E /* korean-small.csv in Resources */,
+				23FA81AD2172A656006AC04E /* orig.csv in Resources */,
+				23FA81AC2172A656006AC04E /* simple_csv_utf8_bom.tsv in Resources */,
+				23FA81A92172A656006AC04E /* ford_escort.csv in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23FA81C72172A70C006AC04E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23FA81F02172A8DA006AC04E /* Document.xib in Resources */,
+				23FA81F12172A8DE006AC04E /* MainMenu.xib in Resources */,
+				23FA81F32172A91F006AC04E /* TabulaRasaTableViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		23FA815D2172A3B9006AC04E /* Sources */ = {
+		23FA81882172A4E1006AC04E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23FA81652172A3B9006AC04E /* main.cpp in Sources */,
+				23FA818F2172A4E1006AC04E /* csv_tests.mm in Sources */,
+				23FA81942172A5B1006AC04E /* parser.cpp in Sources */,
+				23FA81952172A5B1006AC04E /* DSFCSVParser.mm in Sources */,
+				23FA81972172A5B1006AC04E /* DataSource.cpp in Sources */,
+				23FA81962172A5B1006AC04E /* DataSource.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23FA81C52172A70C006AC04E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23FA81EF2172A8D0006AC04E /* Document.swift in Sources */,
+				23FA81ED2172A8CD006AC04E /* AppDelegate.swift in Sources */,
+				23FA81EE2172A8CD006AC04E /* TabulaRasaTableViewController.swift in Sources */,
+				23FA81EC2172A8CD006AC04E /* TabulaRasaData.swift in Sources */,
+				23FA81E82172A7E8006AC04E /* parser.cpp in Sources */,
+				23FA81EB2172A7ED006AC04E /* DataSource.cpp in Sources */,
+				23FA81EA2172A7ED006AC04E /* DataSource.cpp in Sources */,
+				23FA81E92172A7ED006AC04E /* DSFCSVParser.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		23FA817D2172A4A9006AC04E /* Document.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				23FA817E2172A4A9006AC04E /* Base */,
+			);
+			name = Document.xib;
+			sourceTree = "<group>";
+		};
+		23FA817F2172A4A9006AC04E /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				23FA81802172A4A9006AC04E /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		23FA81662172A3B9006AC04E /* Debug */ = {
@@ -236,21 +510,121 @@
 			};
 			name = Release;
 		};
-		23FA81692172A3B9006AC04E /* Debug */ = {
+		23FA81922172A4E1006AC04E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3L6RK3LGGW;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"ALLOW_ICU_EXTENSIONS=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = csv_tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/62.1/lib;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.csv-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/icu4c/62.1/include,
+					csvlib/,
+				);
 			};
 			name = Debug;
 		};
-		23FA816A2172A3B9006AC04E /* Release */ = {
+		23FA81932172A4E1006AC04E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3L6RK3LGGW;
+				GCC_PREPROCESSOR_DEFINITIONS = "ALLOW_ICU_EXTENSIONS=1";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = csv_tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/62.1/lib;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.csv-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/icu4c/62.1/include,
+					csvlib/,
+				);
+			};
+			name = Release;
+		};
+		23FA81DA2172A70C006AC04E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "tools/Tabula Rasa/Tabula_Rasa.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3L6RK3LGGW;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"ALLOW_ICU_EXTENSIONS=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "tools/Tabula Rasa/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/icu4c/62.1/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.Tabula-Rasa";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "./tools/Tabula Rasa/Tabula-Rasa-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/icu4c/62.1/include,
+					csvlib/,
+				);
+			};
+			name = Debug;
+		};
+		23FA81DB2172A70C006AC04E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "tools/Tabula Rasa/Tabula_Rasa.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3L6RK3LGGW;
+				GCC_PREPROCESSOR_DEFINITIONS = "ALLOW_ICU_EXTENSIONS=1";
+				INFOPLIST_FILE = "tools/Tabula Rasa/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/icu4c/62.1/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.Tabula-Rasa";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "./tools/Tabula Rasa/Tabula-Rasa-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/icu4c/62.1/include,
+					csvlib/,
+				);
 			};
 			name = Release;
 		};
@@ -266,11 +640,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		23FA81682172A3B9006AC04E /* Build configuration list for PBXNativeTarget "csvlib" */ = {
+		23FA81912172A4E1006AC04E /* Build configuration list for PBXNativeTarget "csv_tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				23FA81692172A3B9006AC04E /* Debug */,
-				23FA816A2172A3B9006AC04E /* Release */,
+				23FA81922172A4E1006AC04E /* Debug */,
+				23FA81932172A4E1006AC04E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23FA81D92172A70C006AC04E /* Build configuration list for PBXNativeTarget "Tabula Rasa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23FA81DA2172A70C006AC04E /* Debug */,
+				23FA81DB2172A70C006AC04E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
