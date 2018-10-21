@@ -31,7 +31,7 @@ namespace csv
 	{
 	public:
 		bool trimLeadingWhitespace = true;
-		bool keepBlankLines = false;
+		bool skipBlankLines = true;
 		
 		bool cancelled = false;
 

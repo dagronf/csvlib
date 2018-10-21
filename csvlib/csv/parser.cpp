@@ -213,32 +213,13 @@ namespace
 		return returnState;
 	}
 
-	bool recordContainsSomeText(const csv::record& v)
-	{
-		for (std::vector<csv::field>::const_iterator p = v.content.begin(); p != v.content.end(); ++p)
-		{
-			if ((*p).content.length() > 0)
-				return true;
-		}
-		return false;
-	}
-
-	bool shouldEmitRecord(csv::IDataSource& parser, const csv::record& record)
-	{
-		return parser.keepBlankLines || recordContainsSomeText(record);
-	}
-
 	InternalState parseRecord(csv::IDataSource& parser,
-							  size_t row,
-							  csv::FieldCallback emitField,
-							  csv::RecordCallback emitRecord)
+							  csv::record& record,
+							  csv::FieldCallback emitField)
 	{
 		//  record = field *(COMMA field)
 
 		csv::field field;
-		csv::record record;
-		record.row = row;
-		record.content.reserve(20);
 
 		InternalState state = InternalState::EndOfField;
 		bool isNewRecord = true;
@@ -252,30 +233,15 @@ namespace
 
 			field.content = parser.field();
 			field.column = column;
-			field.row = row;
+			field.row = record.row;
 
+			record.add(field);
 			if (emitField && emitField(field) == false)
 			{
-				// If the caller has cancelled the via the field emit, then
-				// dump the current record out and finish.
-				if (emitRecord)
-				{
-					// Make sure to add the last field read to the record before finishing
-					record.add(field);
-					if (shouldEmitRecord(parser, record))
-					{
-						emitRecord(record);
-					}
-				}
 				return InternalState::EndOfFile;
 			}
 
 			isNewRecord = false;
-
-			if (emitRecord)
-			{
-				record.add(field);
-			}
 
 			switch (state)
 			{
@@ -283,16 +249,7 @@ namespace
 					parseSeparator(parser);
 					break;
 				default:
-					if (emitRecord && shouldEmitRecord(parser, record) &&
-						(emitRecord(record) == false))
-					{
-						return InternalState::EndOfFile;
-					}
-
 					// We have finished the current record
-					record.clear();
-					isNewRecord = true;
-					column = 0;
 					return state;
 			}
 			column++;
@@ -316,10 +273,25 @@ namespace csv
 			return State::Complete;
 		}
 
+		csv::record record;
+
 		size_t row = 0;
 		do
 		{
-			state = parseRecord(parser, row++, emitField, emitRecord);
+			record.content.clear();
+			record.row = row;
+
+			state = parseRecord(parser, record, emitField);
+
+			if (!parser.skipBlankLines || !record.empty())
+			{
+				row++;
+				if (emitRecord && (emitRecord(record) == false))
+				{
+					return State::Complete;
+				}
+			}
+
 			if (!parser.next())
 			{
 				return State::Complete;

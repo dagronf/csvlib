@@ -111,6 +111,16 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 	return [bundle URLForResource:name withExtension:extension];
 }
 
+- (void)checkRowIndexes:(const std::vector<csv::record>&)records
+{
+	// Check that the row values match.  This
+	size_t count = 0;
+	for (const auto& record: records)
+	{
+		XCTAssertEqual(count++, record.row);
+	}
+}
+
 - (void)testExample
 {
 	csv::utf8::FileDataSource input;
@@ -122,6 +132,11 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 
 	std::vector<csv::record> records = AddRecords(input);
 	XCTAssertEqual(8, records.size());
+
+	XCTAssertEqual("John \n\"Da Man\" 大夨天 🤪 太夫", records[0][0].content);
+
+	// Check that the row values match.  This
+	[self checkRowIndexes:records];
 }
 
 - (void)testWhitespaceBeforeEOL
@@ -136,6 +151,9 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 
 	XCTAssertEqual(4, records[0].size());
 	XCTAssertEqual(3, records[1].size());
+
+	// Check that the row values match.  This
+	[self checkRowIndexes:records];
 }
 
 - (void)testQuoting
@@ -148,6 +166,9 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 
 	XCTAssertEqual(4, records[0].size());
 	XCTAssertEqual(3, records[1].size());
+
+	// Check that the row values match.  This
+	[self checkRowIndexes:records];
 }
 
 - (void)testComment
@@ -174,6 +195,9 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 	XCTAssertEqual("cat\n#fish", records[1][0].content);
 	XCTAssertEqual("truck", records[1][1].content);
 	XCTAssertEqual("snozzle", records[1][2].content);
+
+	// Check that the row values match.  This
+	[self checkRowIndexes:records];
 }
 
 - (void)testBOMRemoval
@@ -202,6 +226,9 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 	XCTAssertEqual("fish", records[0][0].content);
 	XCTAssertEqual("pig", records[0][1].content);
 	XCTAssertEqual("snort", records[0][2].content);
+
+	// Check that the row values match.  This
+	[self checkRowIndexes:records];
 }
 
 - (void)testColumnOffsetCounter
@@ -230,9 +257,10 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 	// Check field ordering
 	XCTAssertEqual( expected, fields );
 
+	// Check that the row values match.  This
+	[self checkRowIndexes:records];
 
 	XCTAssertEqual(2, records.size());
-
 	XCTAssertEqual(4, records[0].size());
 	XCTAssertEqual(3, records[1].size());
 }
@@ -246,9 +274,11 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 	std::vector<csv::record> records = AddRecords(input);
 
 	XCTAssertEqual(2, records.size());
-
 	XCTAssertEqual(4, records[0].size());
 	XCTAssertEqual(3, records[1].size());
+
+	// Check that the row values match.  This
+	[self checkRowIndexes:records];
 }
 
 - (void)testExampleMax
@@ -261,6 +291,9 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 
 	std::vector<csv::record> records = AddRecordsMax(input, 4);
 	XCTAssertEqual(4, records.size());
+
+	// Check that the row values match.  This
+	[self checkRowIndexes:records];
 }
 
 - (void)testTotalAColumn
@@ -312,14 +345,20 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 	std::vector<csv::record> records = AddRecords(input);
 	XCTAssertEqual(10, records.size());
 
+	// Check that the row values match.  This
+	[self checkRowIndexes:records];
+
 	// Parse the same file, but keep empty lines.
 	csv::utf8::FileDataSource input2;
-	input2.keepBlankLines = true;
+	input2.skipBlankLines = false;
 
 	XCTAssertTrue(input2.open([url fileSystemRepresentation]));
 
 	records = AddRecords(input2);
 	XCTAssertEqual(29, records.size());
+
+	// Check that the row values match.  This
+	[self checkRowIndexes:records];
 }
 
 - (void)testObjcICU

@@ -46,24 +46,24 @@ typedef BOOL (^CSVFieldCallback)(const NSUInteger /* row */,
 typedef BOOL (^CSVRecordCallback)(const NSUInteger /* row */,
 								  const NSArray<NSString*>* /* row content */);
 
-+ (ReturnState)parseUTF8String:(NSString*)str
++ (ReturnState)parseUTF8String:(NSString* _Nonnull)str
 					 separator:(char)separator
 				 fieldCallback:(CSVFieldCallback _Nullable)fieldCallback
 				recordCallback:(CSVRecordCallback _Nullable)recordCallback;
 
-+ (ReturnState)parseUTF8File:(NSURL*)fileURL
++ (ReturnState)parseUTF8File:(NSURL* _Nonnull)fileURL
 				   separator:(char)separator
 			   fieldCallback:(CSVFieldCallback _Nullable)fieldCallback
 			  recordCallback:(CSVRecordCallback _Nullable)recordCallback;
 
-+ (ReturnState)parseData:(NSData*)rawData
++ (ReturnState)parseData:(NSData* _Nonnull)rawData
 			   separator:(char)separator
 		   fieldCallback:(CSVFieldCallback _Nullable)fieldCallback
 		  recordCallback:(CSVRecordCallback _Nullable)recordCallback;
 
 #ifdef ALLOW_ICU_EXTENSIONS
 
-+ (ReturnState)parseFile:(NSURL*)fileURL
++ (ReturnState)parseFile:(NSURL* _Nonnull)fileURL
 			 icuCodepage:(const char* _Nullable)codepage
 			   separator:(char)separator
 		   fieldCallback:(CSVFieldCallback _Nullable)fieldCallback

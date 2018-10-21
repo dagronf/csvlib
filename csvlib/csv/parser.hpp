@@ -52,6 +52,18 @@ namespace csv
 
 		inline void clear() { content.clear(); }
 		inline void add(const field& field) { content.push_back(field); }
+
+		inline bool empty() const
+		{
+			for (const auto& field: content)
+			{
+				if (field.content.length() > 0)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
 	};
 
 	typedef std::function<bool(const field&)> FieldCallback;
