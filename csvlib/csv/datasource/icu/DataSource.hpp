@@ -36,6 +36,8 @@ namespace csv
 		class DataSource: public csv::IDataSource
 		{
 		public:
+			virtual ~DataSource() {}
+			
 			UChar32 separator = ',';
 			UChar32 comment = '\0';
 			
@@ -57,7 +59,7 @@ namespace csv
 		private:
 			U_ICU_NAMESPACE::UnicodeString _field;
 		};
-
+		
 		class FileDataSource: public DataSource
 		{
 		public:

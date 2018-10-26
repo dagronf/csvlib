@@ -30,6 +30,8 @@ namespace csv
 	class IDataSource
 	{
 	public:
+		virtual ~IDataSource() {}
+
 		bool trimLeadingWhitespace = true;
 		bool skipBlankLines = true;
 		

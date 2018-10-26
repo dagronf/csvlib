@@ -48,6 +48,14 @@ class Document: NSDocument {
 		}
 	}
 
+	override func close() {
+		if let tableData = self.tableData
+		{
+			tableData.cancel()
+		}
+		super.close()
+	}
+
 	private func fit(childView: NSView, parentView: NSView)
 	{
 		childView.translatesAutoresizingMaskIntoConstraints = false
@@ -64,7 +72,7 @@ class Document: NSDocument {
 		self.containingView.addSubview(self.tableViewController.view)
 		self.fit(childView: self.tableViewController.view, parentView: self.containingView)
 
-		self.tableData?.load { [weak self] in
+		_ = self.tableData?.load { [weak self] in
 			self?.dataLoaded()
 		}
 	}

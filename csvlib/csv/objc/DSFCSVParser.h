@@ -26,7 +26,27 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@interface DSFCSVDataSource: NSObject
+
++ (DSFCSVDataSource* _Nullable)dataSourceWithUTF8String:(NSString* _Nonnull)str
+											  separator:(char)separator;
+
++ (DSFCSVDataSource* _Nullable)dataSourceWithUTF8FileURL:(NSURL* _Nonnull)fileURL
+											   separator:(char)separator;
+
++ (DSFCSVDataSource* _Nullable)dataSourceWithData:(NSData* _Nonnull)rawData
+										separator:(char)separator;
+
+#ifdef ALLOW_ICU_EXTENSIONS
+
++ (DSFCSVDataSource* _Nullable)dataSourceWithFileURL:(NSURL* _Nonnull)fileURL
+										 icuCodepage:(const char* _Nullable)codepage
+										   separator:(char)separator;
+
+#endif
+
+@end
+
 
 @interface DSFCSVParser : NSObject
 
@@ -41,38 +61,15 @@ typedef NS_ENUM(NSUInteger, ReturnState) {
 
 typedef BOOL (^CSVFieldCallback)(const NSUInteger /* row */,
 								 const NSUInteger /* field */,
-								 const NSString* /* field content */);
+								 const NSString* _Nonnull /* field content */);
 
 typedef BOOL (^CSVRecordCallback)(const NSUInteger /* row */,
-								  const NSArray<NSString*>* /* row content */);
+								  const NSArray<NSString*>* _Nonnull /* row content */);
 
-+ (ReturnState)parseUTF8String:(NSString* _Nonnull)str
-					 separator:(char)separator
-				 fieldCallback:(CSVFieldCallback _Nullable)fieldCallback
-				recordCallback:(CSVRecordCallback _Nullable)recordCallback;
-
-+ (ReturnState)parseUTF8File:(NSURL* _Nonnull)fileURL
-				   separator:(char)separator
-			   fieldCallback:(CSVFieldCallback _Nullable)fieldCallback
-			  recordCallback:(CSVRecordCallback _Nullable)recordCallback;
-
-+ (ReturnState)parseData:(NSData* _Nonnull)rawData
-			   separator:(char)separator
-		   fieldCallback:(CSVFieldCallback _Nullable)fieldCallback
-		  recordCallback:(CSVRecordCallback _Nullable)recordCallback;
-
-#ifdef ALLOW_ICU_EXTENSIONS
-
-+ (ReturnState)parseFile:(NSURL* _Nonnull)fileURL
-			 icuCodepage:(const char* _Nullable)codepage
-			   separator:(char)separator
-		   fieldCallback:(CSVFieldCallback _Nullable)fieldCallback
-		  recordCallback:(CSVRecordCallback _Nullable)recordCallback;
-
-#endif
++ (ReturnState)parseWithDataSource:(DSFCSVDataSource* _Nonnull)dataSource
+					 fieldCallback:(CSVFieldCallback _Nullable)fieldCallback
+					recordCallback:(CSVRecordCallback _Nullable)recordCallback;
 
 @end
-
-NS_ASSUME_NONNULL_END
 
 #endif

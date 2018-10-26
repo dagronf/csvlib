@@ -321,16 +321,17 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 
 - (void)testObjc
 {
-	[DSFCSVParser parseUTF8String:@"cat, dog, fish, whale\ngoober, nostradamus"
-						separator:','
-					fieldCallback:^BOOL(const NSUInteger row, const NSUInteger column, const NSString* field) {
-						NSLog(@"Field (%ld, %ld): %@", row, column, field);
-						return YES;
-					}
-				   recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
-					   NSLog(@"record:\n%@", record);
-					   return YES;
-				   }];
+	DSFCSVDataSource* source = [DSFCSVDataSource dataSourceWithUTF8String:@"cat, dog, fish, whale\ngoober, nostradamus" separator:','];
+
+	[DSFCSVParser parseWithDataSource:source
+						fieldCallback:^BOOL(const NSUInteger row, const NSUInteger column, const NSString* field) {
+							NSLog(@"Field (%ld, %ld): %@", row, column, field);
+							return YES;
+						}
+					   recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
+						   NSLog(@"record:\n%@", record);
+						   return YES;
+					   }];
 }
 
 - (void)testFileWithBlankLinesAndLineEndingsInQuotedStrings
@@ -366,16 +367,19 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 	NSURL* url = [self resourceWithName:@"korean" extension:@"csv"];
 	XCTAssertNotNil(url);
 
-	[DSFCSVParser parseFile:[NSURL fileURLWithPath:@([url fileSystemRepresentation])]
-				icuCodepage:NULL
-				  separator:','
-			  fieldCallback:^BOOL(const NSUInteger row, const NSUInteger column, const NSString* field) {
-				  // NSLog(@"Field:\n%@", field);
-				  return YES;
-			  } recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
-				  // NSLog(@"record:\n%@", record);
-				  return YES;
-			  }];
+	DSFCSVDataSource* source = [DSFCSVDataSource dataSourceWithFileURL:url
+														   icuCodepage:NULL
+															 separator:','];
+	XCTAssertNotNil(source);
+
+	[DSFCSVParser parseWithDataSource:source
+						fieldCallback:^BOOL(const NSUInteger row, const NSUInteger column, const NSString* field) {
+							// NSLog(@"Field:\n%@", field);
+							return YES;
+						} recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
+							// NSLog(@"record:\n%@", record);
+							return YES;
+						}];
 }
 
 - (void)testObjcBuiltInGuess
@@ -386,14 +390,16 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 	NSMutableArray* records = [NSMutableArray arrayWithCapacity:20];
 
 	NSData* data = [NSData dataWithContentsOfURL:url];
+	XCTAssertNotNil(data);
+	DSFCSVDataSource* source = [DSFCSVDataSource dataSourceWithData:data separator:','];
+	XCTAssertNotNil(source);
 
-	[DSFCSVParser parseData:data
-				  separator:','
-			  fieldCallback:nil
-			 recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
-				 [records addObject:record];
-				 return YES;
-			 }];
+	[DSFCSVParser parseWithDataSource:source
+						fieldCallback:nil
+					   recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
+						   [records addObject:record];
+						   return YES;
+					   }];
 
 	XCTAssertEqual(20, [records count]);
 	XCTAssertEqualObjects(records[0][0], @"단행본");				// First cell
