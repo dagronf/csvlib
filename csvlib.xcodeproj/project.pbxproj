@@ -43,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		236F3B652173051A00A5BB57 /* IDataSource.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IDataSource.hpp; sourceTree = "<group>"; };
+		23708B572183A88F00A6994F /* Encoding.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Encoding.hpp; sourceTree = "<group>"; };
 		23FA816D2172A447006AC04E /* parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = csvlib/csv/parser.cpp; sourceTree = SOURCE_ROOT; };
 		23FA816F2172A447006AC04E /* parser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = parser.hpp; path = csvlib/csv/parser.hpp; sourceTree = SOURCE_ROOT; };
 		23FA81702172A44F006AC04E /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataSource.cpp; path = csvlib/csv/datasource/icu/DataSource.cpp; sourceTree = SOURCE_ROOT; };
@@ -112,8 +113,8 @@
 		236F3B5F2172FBA200A5BB57 /* objc */ = {
 			isa = PBXGroup;
 			children = (
-				23FA81722172A450006AC04E /* DSFCSVParser.h */,
 				23FA81712172A450006AC04E /* DSFCSVParser.mm */,
+				23FA81722172A450006AC04E /* DSFCSVParser.h */,
 			);
 			path = objc;
 			sourceTree = "<group>";
@@ -123,6 +124,7 @@
 			children = (
 				23FA81702172A44F006AC04E /* DataSource.cpp */,
 				23FA81732172A450006AC04E /* DataSource.hpp */,
+				23708B572183A88F00A6994F /* Encoding.hpp */,
 			);
 			path = icu;
 			sourceTree = "<group>";
@@ -450,7 +452,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -503,7 +505,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -584,6 +586,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/icu4c/62.1/lib,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.Tabula-Rasa";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -615,6 +618,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/icu4c/62.1/lib,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.Tabula-Rasa";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;

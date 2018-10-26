@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +24,7 @@
                         <rect key="frame" x="1" y="0.0" width="478" height="271"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ixq-QA-xGn" viewBased="YES" id="Esc-1E-urP">
+                            <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" headerView="ixq-QA-xGn" viewBased="YES" id="Esc-1E-urP">
                                 <rect key="frame" x="0.0" y="0.0" width="478" height="246"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -47,16 +48,21 @@
                                                 <rect key="frame" x="1" y="1" width="116" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textField wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ftt-UM-Pfm">
+                                                    <textField wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="Ftt-UM-Pfm">
                                                         <rect key="frame" x="0.0" y="0.0" width="116" height="17"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="fmS-ci-GF5">
+                                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Table View Cell" id="fmS-ci-GF5">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="Ftt-UM-Pfm" secondAttribute="bottom" id="1aN-w8-Fnx"/>
+                                                    <constraint firstItem="Ftt-UM-Pfm" firstAttribute="top" secondItem="k4J-c5-aew" secondAttribute="top" id="4vQ-Wr-x15"/>
+                                                    <constraint firstItem="Ftt-UM-Pfm" firstAttribute="leading" secondItem="k4J-c5-aew" secondAttribute="leading" constant="2" id="HtL-Mw-NCG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Ftt-UM-Pfm" secondAttribute="trailing" constant="2" id="QQQ-jG-30J"/>
+                                                </constraints>
                                                 <connections>
                                                     <outlet property="textField" destination="Ftt-UM-Pfm" id="AmG-46-XHQ"/>
                                                 </connections>
