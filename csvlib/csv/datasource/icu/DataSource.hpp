@@ -36,10 +36,6 @@ namespace csv
 		class DataSource: public csv::IDataSource
 		{
 		public:
-			static std::string TextEncodingForData(const char* data, size_t length);
-			static std::string TextEncodingForFile(const char* file);
-			
-		public:
 			UChar32 separator = ',';
 			UChar32 comment = '\0';
 			

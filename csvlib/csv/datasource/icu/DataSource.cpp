@@ -24,50 +24,10 @@
 
 #ifdef ALLOW_ICU_EXTENSIONS
 
-#include "unicode/ucsdet.h"
-#include "unicode/uclean.h"
+#include "Encoding.hpp"
 
 namespace csv
 {
-	namespace icu
-	{
-		std::string DataSource::TextEncodingForData(const char* data, size_t length)
-		{
-			UErrorCode uerr = U_ZERO_ERROR;
-			UCharsetDetector *ucd = ucsdet_open ( &uerr );
-			ucsdet_setText(ucd, data, static_cast<int>(length), &uerr);
-			UCharsetMatch const * match = ucsdet_detect(ucd, &uerr);
-			
-			std::string detected = ucsdet_getName(match, &uerr);
-			//		printf("Name: %s\n", detected.c_str());
-			//		printf("Lang: %s\n", ucsdet_getLanguage(match, &uerr));
-			//		printf("Confidence: %u\n", ucsdet_getConfidence(match, &uerr));
-			ucsdet_close(ucd);
-			u_cleanup(); // keep valgrind happy!!
-			
-			return detected;
-		}
-		
-		std::string DataSource::TextEncodingForFile(const char* file)
-		{
-			UErrorCode u_glob_status = U_ZERO_ERROR;
-			FILE* fp(0);
-			
-			u_init(&u_glob_status);
-			if (U_SUCCESS(u_glob_status) &&
-				(fp = fopen(file, "rb")) != NULL)
-			{
-				// Read (up to) the first 4k.  It should give us enough to detect the file
-				char buf[4096];
-				size_t read = fread(buf, 1, 4096, fp);
-				
-				fclose(fp);
-				return TextEncodingForData(buf, read);
-			}
-			return "";
-		}
-	};
-	
 	namespace icu
 	{
 		bool DataSource::isSeparator()
@@ -138,11 +98,12 @@ namespace csv
 			std::string file_codepage = codepage ?: "";
 			if (file_codepage.length() == 0)
 			{
-				file_codepage = TextEncodingForFile(file);
-				if (file_codepage.length() == 0)
+				const auto detected = encoding::TextEncodingForFile(file);
+				if (detected.invalid())
 				{
 					return false;
 				}
+				file_codepage = detected.name;
 			}
 			
 			_in = u_fopen(file, "rb", NULL, file_codepage.c_str());
@@ -179,12 +140,18 @@ namespace csv
 	{
 		bool StringDataSource::set(const std::string& text, const char* codepage)
 		{
+			std::string cp = codepage ?: "";
 			if (codepage == NULL)
 			{
-				codepage = TextEncodingForData(text.c_str(), text.length()).c_str();
+				const auto detected = encoding::TextEncodingForData(text.c_str(), text.length());
+				if (detected.invalid())
+				{
+					return false;
+				}
+				cp = detected.name;
 			}
 			
-			_in = U_ICU_NAMESPACE::UnicodeString(text.c_str(), codepage);
+			_in = U_ICU_NAMESPACE::UnicodeString(text.c_str(), cp.c_str());
 			return true;
 		}
 		
