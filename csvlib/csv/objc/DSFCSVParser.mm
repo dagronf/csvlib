@@ -56,7 +56,12 @@ static ReturnState convertError(csv::State state)
 	parser.separator = separator;
 
 	std::string temp = [str cStringUsingEncoding:NSUTF8StringEncoding];
-	parser.set(temp.c_str());
+	if (temp.empty())
+	{
+		// Text wasn't UTF8 encoded
+		return ReturnState::Error;
+	}
+	parser.set(temp);
 
 	return [DSFCSVParser parseUsingParser:parser
 							fieldCallback:fieldCallback

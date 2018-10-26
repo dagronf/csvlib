@@ -74,7 +74,7 @@ namespace csv
 		class StringDataSource: public utf8::DataSource
 		{
 		public:
-			bool set(const char* data);
+			bool set(const std::string& data);
 			
 		public:
 			virtual bool next();

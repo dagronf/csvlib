@@ -141,14 +141,14 @@ namespace csv
 	
 	namespace utf8
 	{
-		bool StringDataSource::set(const char* data)
+		bool StringDataSource::set(const std::string& data)
 		{
 			_in = data;
 			_offset = -1;
 			_prev = 0;
 			
 			// Check for a BOM and skip it
-			if ((strlen(data) > 3) &&
+			if ((data.length() > 3) &&
 				(data[0] == '\xEF' && data[1] == '\xBB' && data[2] == '\xBF'))
 			{
 				// We have a BOM. Set the starting offset to AFTER it
