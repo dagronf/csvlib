@@ -66,6 +66,22 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 	return records;
 }
 
+std::vector<csv::record> AddRecords(const std::string& str)
+{
+	std::vector<csv::record> records;
+
+	csv::utf8::StringDataSource input;
+	input.set(str);
+
+	auto recordAdder = [&](const csv::record& record) -> bool {
+		records.push_back(record);
+		return true;
+	};
+
+	csv::parse(input, NULL, recordAdder);
+	return records;
+}
+
 - (void)testSimple
 {
 	std::vector<csv::record> records;
@@ -137,6 +153,47 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 
 	// Check that the row values match.  This
 	[self checkRowIndexes:records];
+}
+
+- (void)testRFC
+{
+	std::string i26 = "\"aaa\",\"b \r\nbb\",\"ccc\" \r\n	zzz,yyy,xxx";
+	std::vector<csv::record> records = AddRecords(i26);
+
+	XCTAssertEqual(2, records.size());
+	XCTAssertEqual(3, records[0].size());
+	XCTAssertEqual(3, records[1].size());
+
+	XCTAssertEqual("aaa", records[0][0].content);
+	XCTAssertEqual("b \r\nbb", records[0][1].content);
+	XCTAssertEqual("ccc", records[0][2].content);
+
+	XCTAssertEqual("\tzzz", records[1][0].content);
+	XCTAssertEqual("yyy", records[1][1].content);
+	XCTAssertEqual("xxx", records[1][2].content);
+
+	std::string i27 = "aaa,b\"\"bb,ccc";
+
+	records = AddRecords(i27);
+	XCTAssertEqual(3, records[0].size());
+
+	XCTAssertEqual("aaa", records[0][0].content);
+	XCTAssertEqual("b\"bb", records[0][1].content);
+	XCTAssertEqual("ccc", records[0][2].content);
+
+	std::string i25 = "\"aaa\",\"bbb\",\"ccc\"\r\nzzz,yyy,xxx";
+	records = AddRecords(i25);
+	XCTAssertEqual(2, records.size());
+
+	XCTAssertEqual(3, records[0].size());
+	XCTAssertEqual("aaa", records[0][0].content);
+	XCTAssertEqual("bbb", records[0][1].content);
+	XCTAssertEqual("ccc", records[0][2].content);
+
+	XCTAssertEqual(3, records[1].size());
+	XCTAssertEqual("zzz", records[1][0].content);
+	XCTAssertEqual("yyy", records[1][1].content);
+	XCTAssertEqual("xxx", records[1][2].content);
 }
 
 - (void)testWhitespaceBeforeEOL

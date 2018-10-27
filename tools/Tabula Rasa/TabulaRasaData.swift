@@ -15,6 +15,7 @@ class TabulaRasaData: NSObject {
 	private var loading: Bool = false
 
 	private let group = DispatchGroup()
+	private let serialQueue = DispatchQueue(label: "com.csvlib.swiftsync")
 
 	enum FileType: NSInteger
 	{
@@ -36,11 +37,27 @@ class TabulaRasaData: NSObject {
 		self.rawData.append(record);
 	}
 
+	private func setCancelled(_ cancelled: Bool)
+	{
+		serialQueue.sync {
+			self.cancelled = cancelled
+		}
+	}
+
+	private func isActive() -> Bool
+	{
+		var isActive = false
+		serialQueue.sync {
+			isActive = !self.cancelled
+		}
+		return isActive
+	}
+
 	func cancel()
 	{
 		if (self.loading)
 		{
-			self.cancelled = true
+			self.setCancelled(true)
 			self.group.wait()
 		}
 	}
@@ -50,7 +67,7 @@ class TabulaRasaData: NSObject {
 		assert(self.loading == false)
 
 		// Prepare
-		self.cancelled = false
+		self.setCancelled(false)
 		self.rawData.removeAll()
 
 		let sep: UnicodeScalar = self.type == .csv ? "," : "\t"
@@ -83,13 +100,13 @@ class TabulaRasaData: NSObject {
 						   fieldCallback: nil)
 		{ (row: UInt, record: [String]) -> Bool in
 			self.addRecords(record: record)
-			return !self.cancelled
+			return self.isActive()
 		}
 
 		self.loading = false
 		self.group.leave()
 
-		if !self.cancelled
+		if self.isActive()
 		{
 			/// Only call the completion block if we weren't cancelled
 			DispatchQueue.main.async {
