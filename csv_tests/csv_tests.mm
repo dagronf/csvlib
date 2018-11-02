@@ -155,6 +155,23 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	[self checkRowIndexes:records];
 }
 
+- (void)testExceptions
+{
+	// Invalid filename
+	XCTAssertThrows(csv::utf8::FileDataSource("caterpillar"));
+
+	// Invalid filename
+	XCTAssertThrows(csv::icu::FileDataSource("caterpillar", NULL));
+
+	// Now check with a proper file
+	NSURL* url = [self resourceWithName:@"orig" extension:@"csv"];
+	XCTAssertNotNil(url);
+	XCTAssertNoThrow(csv::utf8::FileDataSource([url fileSystemRepresentation]));
+
+	// Check throw if we pass a dodgy codepage
+	XCTAssertThrows(csv::icu::FileDataSource([url fileSystemRepresentation], "cccc"));
+}
+
 - (void)testRFC
 {
 	std::string i26 = "\"aaa\",\"b \r\nbb\",\"ccc\" \r\n	zzz,yyy,xxx";
@@ -257,7 +274,21 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	[self checkRowIndexes:records];
 }
 
-- (void)testBOMRemoval
+- (void)testTinyFileSmallerThanUTF8BOM
+{
+	// Check filesize less than BOM
+	std::vector<csv::record> records;
+
+	csv::utf8::StringDataSource input;
+	XCTAssertTrue(input.set("a"));
+	records = AddRecords(input);
+
+	XCTAssertEqual(1, records.size());
+	XCTAssertEqual(1, records[0].size());
+	XCTAssertEqual("a", records[0][0].content);
+}
+
+- (void)testUTF8BOMRemoval
 {
 	csv::utf8::StringDataSource input;
 	XCTAssertTrue(input.set("\xEF\xBB\xBF cat, dog, fish"));

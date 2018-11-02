@@ -63,6 +63,15 @@ namespace csv
 		class FileDataSource: public DataSource
 		{
 		public:
+			FileDataSource() noexcept {}
+			FileDataSource(const std::string& file, const char* codepage)
+			{
+				if (!open(file.c_str(), codepage))
+				{
+					throw std::runtime_error("Unable to open file for source");
+				}
+			}
+
 			bool open(const char* file, const char* codepage);
 			virtual ~FileDataSource();
 			
@@ -77,6 +86,15 @@ namespace csv
 		class StringDataSource: public DataSource
 		{
 		public:
+			StringDataSource() noexcept : _offset(-1) {}
+			StringDataSource(const std::string& data, const char* codepage)
+			{
+				if (!set(data, codepage))
+				{
+					throw std::runtime_error("Unable to set string data for source");
+				}
+			}
+
 			bool set(const std::string& text, const char* codepage);
 			
 		protected:

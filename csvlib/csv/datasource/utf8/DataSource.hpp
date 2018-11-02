@@ -61,6 +61,14 @@ namespace csv
 		class FileDataSource: public utf8::DataSource
 		{
 		public:
+			FileDataSource() noexcept {}
+			FileDataSource(const char* file)
+			{
+				if (!open(file))
+				{
+					throw std::runtime_error("Unable to open file for source");
+				}
+			}
 			bool open(const char* file);
 			
 		public:
@@ -74,6 +82,14 @@ namespace csv
 		class StringDataSource: public utf8::DataSource
 		{
 		public:
+			StringDataSource() noexcept : _offset(-1) {}
+			StringDataSource(const std::string& data)
+			{
+				if (!set(data))
+				{
+					throw std::runtime_error("Unable to set string data for source");
+				}
+			}
 			bool set(const std::string& data);
 			
 		public:
@@ -81,7 +97,7 @@ namespace csv
 			virtual void back();
 			
 		private:
-			size_t _offset = -1;
+			size_t _offset;
 			std::string _in;
 		};
 	};
