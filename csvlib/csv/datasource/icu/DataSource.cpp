@@ -26,155 +26,129 @@
 
 #include "Encoding.hpp"
 
-namespace csv
-{
-	namespace icu
-	{
-		bool DataSource::isSeparator()
-		{
-			return _current == separator;
-		}
-		
-		bool DataSource::isComment()
-		{
-			return comment != '\0' && comment != _current;
-		}
-		
-		bool DataSource::isWhitespace()
-		{
-			return _current == ' ';
-		}
-		
-		bool DataSource::isQuote()
-		{
-			return _current == '\"';
-		}
-		
-		bool DataSource::isEOL()
-		{
-			if (_current == '\r')
-			{
-				if (next() == false)
-				{
-					// Hit the end of file.  Return true and let the caller handle it
-					return true;
-				}
-				
-				if (_current != '\n')
-				{
-					back();
-				}
+namespace csv {
+namespace icu {
+
+	bool DataSource::isSeparator() {
+		return _current == separator;
+	}
+
+	bool DataSource::isComment() {
+		return comment != '\0' && comment != _current;
+	}
+
+	bool DataSource::isWhitespace() {
+		return _current == ' ';
+	}
+
+	bool DataSource::isQuote() {
+		return _current == '\"';
+	}
+
+	bool DataSource::isEOL() {
+		if (_current == '\r') {
+			if (next() == false) {
+				// Hit the end of file.  Return true and let the caller handle it
 				return true;
 			}
-			else if (_current == '\n')
-			{
-				return true;
+
+			if (_current != '\n') {
+				back();
 			}
+			return true;
+		}
+		else if (_current == '\n') {
+			return true;
+		}
+		return false;
+	}
+
+	void DataSource::clear_field() {
+		_field.remove();
+	}
+
+	void DataSource::push() {
+		_field += _current;
+	}
+
+	std::string DataSource::field() {
+		std::string converted;
+		_field.toUTF8String(converted);
+		return converted;
+	}
+};
+
+namespace icu {
+	bool FileDataSource::open(const char* file, const char* codepage) {
+		std::string file_codepage = codepage ?: "";
+		if (file_codepage.length() == 0) {
+			const auto detected = encoding::TextEncodingForFile(file);
+			if (detected.invalid()) {
+				return false;
+			}
+			file_codepage = detected.name;
+		}
+
+		_in = u_fopen(file, "rb", NULL, file_codepage.c_str());
+		return _in != NULL;
+	}
+
+	FileDataSource::~FileDataSource() {
+		u_fclose(_in);
+	}
+
+	bool FileDataSource::next() {
+		if (u_feof(_in)) {
 			return false;
 		}
-		
-		void DataSource::clear_field()
-		{
-			_field.remove();
-		}
-		
-		void DataSource::push()
-		{
-			_field += _current;
-		}
-		
-		std::string DataSource::field()
-		{
-			std::string converted;
-			_field.toUTF8String(converted);
-			return converted;
-		}
-	};
-	
-	namespace icu
-	{
-		bool FileDataSource::open(const char* file, const char* codepage)
-		{
-			std::string file_codepage = codepage ?: "";
-			if (file_codepage.length() == 0)
-			{
-				const auto detected = encoding::TextEncodingForFile(file);
-				if (detected.invalid())
-				{
-					return false;
-				}
-				file_codepage = detected.name;
-			}
-			
-			_in = u_fopen(file, "rb", NULL, file_codepage.c_str());
-			return _in != NULL;
-		}
-		
-		FileDataSource::~FileDataSource()
-		{
-			u_fclose(_in);
-		}
-		
-		bool FileDataSource::next()
-		{
-			if (u_feof(_in))
-			{
+
+		_prev = _current;
+		_current = u_fgetc(_in);
+
+		return true;
+	}
+
+	void FileDataSource::back() {
+		u_fungetc(_current, _in);
+		_current = _prev;
+		_prev = 0;
+	}
+};
+
+namespace icu {
+
+	bool StringDataSource::set(const std::string& text, const char* codepage) {
+		std::string cp = codepage ?: "";
+		if (codepage == NULL) {
+			const auto detected = encoding::TextEncodingForData(text.c_str(), text.length());
+			if (detected.invalid()) {
 				return false;
 			}
-			
-			_prev = _current;
-			_current = u_fgetc(_in);
-			
-			return true;
+			cp = detected.name;
 		}
-		
-		void FileDataSource::back()
-		{
-			u_fungetc(_current, _in);
-			_current = _prev;
-			_prev = 0;
+
+		_in = U_ICU_NAMESPACE::UnicodeString(text.c_str(), cp.c_str());
+		return true;
+	}
+
+	bool StringDataSource::next() {
+		_offset++;
+		if (_offset >= _in.length()) {
+			return false;
 		}
-	};
-	
-	namespace icu
-	{
-		bool StringDataSource::set(const std::string& text, const char* codepage)
-		{
-			std::string cp = codepage ?: "";
-			if (codepage == NULL)
-			{
-				const auto detected = encoding::TextEncodingForData(text.c_str(), text.length());
-				if (detected.invalid())
-				{
-					return false;
-				}
-				cp = detected.name;
-			}
-			
-			_in = U_ICU_NAMESPACE::UnicodeString(text.c_str(), cp.c_str());
-			return true;
-		}
-		
-		bool StringDataSource::next()
-		{
-			_offset++;
-			if (_offset >= _in.length())
-			{
-				return false;
-			}
-			
-			_prev = _current;
-			_current = _in[_offset];
-			return true;
-		}
-		
-		void StringDataSource::back()
-		{
-			_current = _prev;
-			_prev = 0;
-			_offset--;
-		}
-	};
+
+		_prev = _current;
+		_current = _in[_offset];
+		return true;
+	}
+
+	void StringDataSource::back() {
+		_current = _prev;
+		_prev = 0;
+		_offset--;
+	}
+
+};
 };
 
 #endif

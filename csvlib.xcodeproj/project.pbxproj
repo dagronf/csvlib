@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		238430BF21E7F4F6003740F0 /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BA21E7F4F6003740F0 /* libicui18n.a */; };
+		238430C021E7F4F6003740F0 /* libicuio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BB21E7F4F6003740F0 /* libicuio.a */; };
+		238430C121E7F4F6003740F0 /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BC21E7F4F6003740F0 /* libicudata.a */; };
+		238430C221E7F4F6003740F0 /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BD21E7F4F6003740F0 /* libicuuc.a */; };
+		238430C321E7F4F6003740F0 /* libicutu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BE21E7F4F6003740F0 /* libicutu.a */; };
 		23FA818F2172A4E1006AC04E /* csv_tests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 23FA818E2172A4E1006AC04E /* csv_tests.mm */; };
 		23FA81942172A5B1006AC04E /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA816D2172A447006AC04E /* parser.cpp */; };
 		23FA81952172A5B1006AC04E /* DSFCSVParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81712172A450006AC04E /* DSFCSVParser.mm */; };
 		23FA81962172A5B1006AC04E /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81702172A44F006AC04E /* DataSource.cpp */; };
 		23FA81972172A5B1006AC04E /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81752172A450006AC04E /* DataSource.cpp */; };
-		23FA819E2172A62B006AC04E /* libicuio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA81992172A62B006AC04E /* libicuio.a */; };
-		23FA819F2172A62B006AC04E /* libicutu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819A2172A62B006AC04E /* libicutu.a */; };
-		23FA81A02172A62B006AC04E /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819B2172A62B006AC04E /* libicui18n.a */; };
-		23FA81A12172A62B006AC04E /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819C2172A62B006AC04E /* libicuuc.a */; };
-		23FA81A22172A62B006AC04E /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23FA819D2172A62B006AC04E /* libicudata.a */; };
 		23FA81A92172A656006AC04E /* ford_escort.csv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81A42172A655006AC04E /* ford_escort.csv */; };
 		23FA81AA2172A656006AC04E /* korean.csv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81A52172A655006AC04E /* korean.csv */; };
 		23FA81AB2172A656006AC04E /* classification.csv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81A62172A655006AC04E /* classification.csv */; };
@@ -41,9 +41,26 @@
 		23FA81F92172B125006AC04E /* korean-small.csv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81F82172B125006AC04E /* korean-small.csv */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		238430B921E7F436003740F0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		236F3B652173051A00A5BB57 /* IDataSource.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IDataSource.hpp; sourceTree = "<group>"; };
 		23708B572183A88F00A6994F /* Encoding.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Encoding.hpp; sourceTree = "<group>"; };
+		238430BA21E7F4F6003740F0 /* libicui18n.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicui18n.a; path = ../../../../../usr/local/Cellar/icu4c/63.1/lib/libicui18n.a; sourceTree = "<group>"; };
+		238430BB21E7F4F6003740F0 /* libicuio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicuio.a; path = ../../../../../usr/local/Cellar/icu4c/63.1/lib/libicuio.a; sourceTree = "<group>"; };
+		238430BC21E7F4F6003740F0 /* libicudata.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicudata.a; path = ../../../../../usr/local/Cellar/icu4c/63.1/lib/libicudata.a; sourceTree = "<group>"; };
+		238430BD21E7F4F6003740F0 /* libicuuc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicuuc.a; path = ../../../../../usr/local/Cellar/icu4c/63.1/lib/libicuuc.a; sourceTree = "<group>"; };
+		238430BE21E7F4F6003740F0 /* libicutu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicutu.a; path = ../../../../../usr/local/Cellar/icu4c/63.1/lib/libicutu.a; sourceTree = "<group>"; };
 		23FA816D2172A447006AC04E /* parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = csvlib/csv/parser.cpp; sourceTree = SOURCE_ROOT; };
 		23FA816F2172A447006AC04E /* parser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = parser.hpp; path = csvlib/csv/parser.hpp; sourceTree = SOURCE_ROOT; };
 		23FA81702172A44F006AC04E /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataSource.cpp; path = csvlib/csv/datasource/icu/DataSource.cpp; sourceTree = SOURCE_ROOT; };
@@ -87,11 +104,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23FA819E2172A62B006AC04E /* libicuio.a in Frameworks */,
-				23FA819F2172A62B006AC04E /* libicutu.a in Frameworks */,
-				23FA81A02172A62B006AC04E /* libicui18n.a in Frameworks */,
-				23FA81A12172A62B006AC04E /* libicuuc.a in Frameworks */,
-				23FA81A22172A62B006AC04E /* libicudata.a in Frameworks */,
+				238430BF21E7F4F6003740F0 /* libicui18n.a in Frameworks */,
+				238430C021E7F4F6003740F0 /* libicuio.a in Frameworks */,
+				238430C121E7F4F6003740F0 /* libicudata.a in Frameworks */,
+				238430C221E7F4F6003740F0 /* libicuuc.a in Frameworks */,
+				238430C321E7F4F6003740F0 /* libicutu.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +246,11 @@
 		23FA81982172A62B006AC04E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				238430BC21E7F4F6003740F0 /* libicudata.a */,
+				238430BA21E7F4F6003740F0 /* libicui18n.a */,
+				238430BB21E7F4F6003740F0 /* libicuio.a */,
+				238430BE21E7F4F6003740F0 /* libicutu.a */,
+				238430BD21E7F4F6003740F0 /* libicuuc.a */,
 				23FA819D2172A62B006AC04E /* libicudata.a */,
 				23FA819B2172A62B006AC04E /* libicui18n.a */,
 				23FA81992172A62B006AC04E /* libicuio.a */,
@@ -278,6 +300,7 @@
 				23FA81C52172A70C006AC04E /* Sources */,
 				23FA81C62172A70C006AC04E /* Frameworks */,
 				23FA81C72172A70C006AC04E /* Resources */,
+				238430B921E7F436003740F0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -529,12 +552,12 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/62.1/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.csv-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/62.1/include,
+					/usr/local/Cellar/icu4c/63.1/include,
 					csvlib/,
 				);
 			};
@@ -554,12 +577,12 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/62.1/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.csv-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/62.1/include,
+					/usr/local/Cellar/icu4c/63.1/include,
 					csvlib/,
 				);
 			};
@@ -584,7 +607,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/icu4c/62.1/lib,
+					/usr/local/Cellar/icu4c/63.1/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.Tabula-Rasa";
@@ -594,7 +617,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/62.1/include,
+					/usr/local/Cellar/icu4c/63.1/include,
 					csvlib/,
 				);
 			};
@@ -616,7 +639,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/icu4c/62.1/lib,
+					/usr/local/Cellar/icu4c/63.1/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.Tabula-Rasa";
@@ -626,7 +649,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/62.1/include,
+					/usr/local/Cellar/icu4c/63.1/include,
 					csvlib/,
 				);
 			};

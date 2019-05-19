@@ -91,55 +91,60 @@ Using ICU allows the parser to attempt to guess the encoding of a text file auto
 
 #### Read all records in a file, returning each field along with the complete records as the file is read 
 
-```
-	csv::datasource::utf8::FileDataSource input;
-	if (input.open("<some-csv-file>.csv"))
-	{
-		csv::parse(input,
-			[](const csv::field& field) -> bool {
-				// Do something with 'field'
-				return true;
-			},
-			[](const csv::record& record) -> bool {
-				// Do something with 'record'
-				return true;
-			}
-		);
-	}
+```cpp
+csv::datasource::utf8::FileDataSource input;
+
+if (!input.open("<some-csv-file>.csv")) {
+   assert(false);
+}
+
+csv::parse(input,
+   [](const csv::field& field) -> bool {
+      // Do something with 'field'
+      return true;
+   },
+      [](const csv::record& record) -> bool {
+      // Do something with 'record'
+      return true;
+   }
+);
+
 ```
 
 #### Read only the first 20 records in a file ignoring field callbacks
-```
-	csv::datasource::utf8::FileDataSource input;
-	if (input.open("<some-csv-file>.csv"))
-	{
-		int32_t maxRows = 20;
-		csv::parse(input, NULL,
-			[=](const csv::record& record) -> bool {
-				return record.row < (maxRows - 1);
-			}
-		);
-	}
+```cpp
+csv::datasource::utf8::FileDataSource input;
+if (!input.open("<some-csv-file>.csv")) {
+   assert(false);
+}
+
+const size_t maxRows = 20;
+csv::parse(input, NULL,
+   [=](const csv::record& record) -> bool {
+      return record.row < maxRows - 1;
+   }
+);
 ```
 
 #### Use ICU to read CSV from a file with unknown encoding (EUC-KR)
 
 (Requires linking against the appropriate ICU libraries)
 
-```
-	csv::datasource::icu::FileParser parser;
-	if (parser.open("/tmp/korean.csv", NULL))
-	{
-		csv::parse(parser,
-			[](const csv::field& field) -> bool {
-				std::cout << "* Field: (" << field.column << " : " << field.content << ")" << std::endl;
-				return true;
-			},
-			[](const csv::record& record) -> bool {
-				return true;
-			}
-		);
-	}
+```cpp
+csv::datasource::icu::FileParser parser;
+if (!parser.open("/tmp/korean.csv", NULL)) {
+   assert(false);
+}
+
+csv::parse(parser,
+   [](const csv::field& field) -> bool {
+      std::cout << "* Field: (" << field.column << " : " << field.content << ")" << std::endl;
+      return true;
+   },
+   [](const csv::record& record) -> bool {
+      return true;
+   }
+);
 ```
 
 
@@ -147,32 +152,32 @@ Using ICU allows the parser to attempt to guess the encoding of a text file auto
 
 #### Read CSV row data from an NSString
 
-```
-	[DSFCSVParser parseUTF8String:@"cat, dog, fish\rwhale, narwhal, swordfish"
-		fieldCallback:^BOOL(const NSUInteger row, const NSUInteger column, const NSString* field) {
-			NSLog(@"Field:\n%@", field);
-			return YES;
-		} 
-		recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
-			NSLog(@"Record:\n%@", record);
-			return YES;
-		}];
+```objc
+[DSFCSVParser parseUTF8String:@"cat, dog, fish\rwhale, narwhal, swordfish"
+                fieldCallback:^BOOL(const NSUInteger row, const NSUInteger column, const NSString* field) {
+                   NSLog(@"Field:\n%@", field);
+                   return YES;
+                } 
+                recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
+                   NSLog(@"Record:\n%@", record);
+                   return YES;
+                }];
 ```
 
 #### Read string data from an NSData object using CoreFoundation to infer the encoding
 
 (CoreFoundation has the ability to convert from NSData to NSString by inferring the encoding without the need to link against ICU which is quite nice.)
 
-```
-	NSURL* fileURL = <some file URL>
-	NSData* data = [NSData dataWithContentsOfURL:url];
-	[DSFCSVParser parseData:data
-		fieldCallback:^BOOL(const NSUInteger row, const NSUInteger column, const NSString* field) {
-			NSLog(@"Field:\n%@", field);
-			return YES;
-		}
-		recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
-			NSLog(@"Record:\n%@", record);
-			return YES;
-	}];
+```objc
+NSURL* fileURL = <some file URL>
+NSData* data = [NSData dataWithContentsOfURL:url];
+[DSFCSVParser parseData:data
+          fieldCallback:^BOOL(const NSUInteger row, const NSUInteger column, const NSString* field) {
+              NSLog(@"Field:\n%@", field);
+              return YES;
+          }
+          recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
+              NSLog(@"Record:\n%@", record);
+              return YES;
+          }];
 ```

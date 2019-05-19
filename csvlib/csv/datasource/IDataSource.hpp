@@ -25,32 +25,33 @@
 #include <string>
 #include <vector>
 
-namespace csv
-{
-	class IDataSource
-	{
-	public:
-		virtual ~IDataSource() {}
+namespace csv {
 
-		bool trimLeadingWhitespace = true;
-		bool skipBlankLines = true;
-		
-		bool cancelled = false;
+class IDataSource {
 
-		/// Move to the next character.  Returns 'false' if EOF is found
-		virtual bool next() = 0;
+public:
+	virtual ~IDataSource() {}
 
-		/// Move back a single character
-		virtual void back() = 0;
+	bool trimLeadingWhitespace = true;
+	bool skipBlankLines = true;
 
-		virtual bool isComment() = 0;
-		virtual bool isSeparator() = 0;
-		virtual bool isWhitespace() = 0;
-		virtual bool isQuote() = 0;
-		virtual bool isEOL() = 0;
+	bool cancelled = false;
 
-		virtual void clear_field() = 0;
-		virtual void push() = 0;
-		virtual std::string field() = 0;
-	};
+	/// Move to the next character.  Returns 'false' if EOF is found
+	virtual bool next() = 0;
+
+	/// Move back a single character
+	virtual void back() = 0;
+
+	virtual bool isComment() = 0;
+	virtual bool isSeparator() = 0;
+	virtual bool isWhitespace() = 0;
+	virtual bool isQuote() = 0;
+	virtual bool isEOL() = 0;
+
+	virtual void clear_field() = 0;
+	virtual void push() = 0;
+	virtual std::string field() = 0;
+};
+
 };

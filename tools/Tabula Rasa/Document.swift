@@ -9,14 +9,13 @@
 import Cocoa
 
 class Document: NSDocument {
-
 	private var tableData: TabulaRasaData?
 
 	@IBOutlet var tableViewController: TabulaRasaTableViewController!
-	@IBOutlet weak var containingView: NSView!
+	@IBOutlet var containingView: NSView!
 
 	override init() {
-	    super.init()
+		super.init()
 		// Add your subclass-specific initialization here.
 	}
 
@@ -36,28 +35,23 @@ class Document: NSDocument {
 //		throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
 //	}
 
-	override func read(from url: URL, ofType typeName: String) throws
-	{
-		if typeName == "TSV Document Type"
-		{
+	override func read(from url: URL, ofType typeName: String) throws {
+		if typeName == "TSV Document Type" {
 			self.tableData = TabulaRasaData(url: url, type: .tsv)
 		}
-		else
-		{
+		else {
 			self.tableData = TabulaRasaData(url: url, type: .csv)
 		}
 	}
 
 	override func close() {
-		if let tableData = self.tableData
-		{
+		if let tableData = self.tableData {
 			tableData.cancel()
 		}
 		super.close()
 	}
 
-	private func fit(childView: NSView, parentView: NSView)
-	{
+	private func fit(childView: NSView, parentView: NSView) {
 		childView.translatesAutoresizingMaskIntoConstraints = false
 		childView.topAnchor.constraint(equalTo: parentView.topAnchor).isActive = true
 		childView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor).isActive = true
@@ -65,8 +59,7 @@ class Document: NSDocument {
 		childView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor).isActive = true
 	}
 
-	override func windowControllerDidLoadNib(_ windowController: NSWindowController)
-	{
+	override func windowControllerDidLoadNib(_: NSWindowController) {
 		self.tableViewController.loadView()
 
 		self.containingView.addSubview(self.tableViewController.view)
@@ -77,10 +70,7 @@ class Document: NSDocument {
 		}
 	}
 
-	func dataLoaded()
-	{
+	func dataLoaded() {
 		self.tableViewController.update(source: self.tableData!)
 	}
-
 }
-

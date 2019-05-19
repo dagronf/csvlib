@@ -31,8 +31,7 @@
 #include <csv/datasource/utf8/DataSource.hpp>
 #include <csv/datasource/icu/DataSource.hpp>
 
-@interface DSFCSVDataSource ()
-{
+@interface DSFCSVDataSource () {
 	std::unique_ptr<csv::IDataSource> __source;
 }
 
@@ -42,25 +41,21 @@
 
 @implementation DSFCSVDataSource
 
-- (csv::IDataSource&)source
-{
+- (csv::IDataSource&)source {
 	return *__source;
 }
 
 
-- (void)dealloc
-{
+- (void)dealloc {
 	/// OBJC++: C++ members do not automatically have their destructors called on dealloc
 	///         thus this will leak unless we explicitly clean up.
 	__source.reset();
 }
 
 + (DSFCSVDataSource* _Nullable)dataSourceWithUTF8String:(NSString*)str
-									separator:(char)separator
-{
+									separator:(char)separator {
 	std::string temp = [str cStringUsingEncoding:NSUTF8StringEncoding];
-	if (temp.empty())
-	{
+	if (temp.empty()) {
 		// Text wasn't UTF8 encoded
 		return nil;
 	}
@@ -76,11 +71,9 @@
 }
 
 + (DSFCSVDataSource* _Nullable)dataSourceWithUTF8FileURL:(NSURL* _Nonnull)fileURL
-									 separator:(char)separator
-{
+											   separator:(char)separator {
 	auto data = std::make_unique<csv::utf8::FileDataSource>();
-	if (!data->open([fileURL fileSystemRepresentation]))
-	{
+	if (!data->open([fileURL fileSystemRepresentation])) {
 		return nil;
 	}
 
@@ -93,8 +86,7 @@
 }
 
 + (DSFCSVDataSource* _Nullable)dataSourceWithData:(NSData* _Nonnull)rawData
-							  separator:(char)separator
-{
+										separator:(char)separator {
 	NSString* rawString;
 	BOOL isLossy;
 
@@ -103,8 +95,7 @@
 					convertedString:&rawString
 				usedLossyConversion:&isLossy];
 
-	if (rawString != nil)
-	{
+	if (rawString != nil) {
 		return [DSFCSVDataSource dataSourceWithUTF8String:rawString separator:separator];
 	}
 
@@ -114,12 +105,10 @@
 #ifdef ALLOW_ICU_EXTENSIONS
 
 + (DSFCSVDataSource* _Nullable)dataSourceWithFileURL:(NSURL* _Nonnull)fileURL
-							   icuCodepage:(const char* _Nullable)codepage
-								 separator:(char)separator
-{
+										 icuCodepage:(const char* _Nullable)codepage
+										   separator:(char)separator {
 	auto data = std::make_unique<csv::icu::FileDataSource>();
-	if (!data->open([fileURL fileSystemRepresentation], codepage))
-	{
+	if (!data->open([fileURL fileSystemRepresentation], codepage)) {
 		return nil;
 	}
 
@@ -140,8 +129,7 @@
 @implementation DSFCSVParser
 
 /// Convert the CSV Parser error to an Objc error
-static ReturnState convertError(csv::State state)
-{
+static ReturnState convertError(csv::State state) {
 	switch(state)
 	{
 		case csv::State::Complete:
@@ -155,24 +143,21 @@ static ReturnState convertError(csv::State state)
 
 + (ReturnState)parseWithDataSource:(DSFCSVDataSource*)dataSource
 					 fieldCallback:(CSVFieldCallback _Nullable)fieldCallback
-					recordCallback:(CSVRecordCallback _Nullable)recordCallback
-{
+					recordCallback:(CSVRecordCallback _Nullable)recordCallback {
+
 	csv::IDataSource& source = [dataSource source];
 
 	// Callback when we receive a field
-	csv::FieldCallback field = [&](const csv::field& field) -> bool
-	{
+	csv::FieldCallback field = [&](const csv::field& field) -> bool {
 		assert(fieldCallback != nil);
 		return fieldCallback(field.row, field.column, [NSString stringWithUTF8String:field.content.c_str()]) == YES;
 	};
 
 	// Callback when we receive a record
-	csv::RecordCallback record = [&](const csv::record& record) -> bool
-	{
+	csv::RecordCallback record = [&](const csv::record& record) -> bool {
 		assert(recordCallback != nil);
 		NSMutableArray<NSString*>* rowData = [NSMutableArray arrayWithCapacity:record.content.size()];
-		for (const auto& field : record.content)
-		{
+		for (const auto& field : record.content) {
 			[rowData addObject:[NSString stringWithUTF8String:field.content.c_str()]];
 		}
 		NSArray<NSString*>* result = [rowData copy];

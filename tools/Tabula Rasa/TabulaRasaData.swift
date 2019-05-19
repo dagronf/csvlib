@@ -9,7 +9,6 @@
 import Cocoa
 
 class TabulaRasaData: NSObject {
-
 	private let url: URL
 	private var cancelled: Bool = false
 	private var loading: Bool = false
@@ -17,8 +16,7 @@ class TabulaRasaData: NSObject {
 	private let group = DispatchGroup()
 	private let serialQueue = DispatchQueue(label: "com.csvlib.swiftsync")
 
-	enum FileType: NSInteger
-	{
+	enum FileType: NSInteger {
 		case csv = 0
 		case tsv = 1
 	}
@@ -32,20 +30,17 @@ class TabulaRasaData: NSObject {
 		super.init()
 	}
 
-	private func addRecords(record: [String])
-	{
-		self.rawData.append(record);
+	private func addRecords(record: [String]) {
+		self.rawData.append(record)
 	}
 
-	private func setCancelled(_ cancelled: Bool)
-	{
-		serialQueue.sync {
+	private func setCancelled(_ cancelled: Bool) {
+		self.serialQueue.sync {
 			self.cancelled = cancelled
 		}
 	}
 
-	private func isActive() -> Bool
-	{
+	private func isActive() -> Bool {
 		var isActive = false
 		serialQueue.sync {
 			isActive = !self.cancelled
@@ -53,17 +48,14 @@ class TabulaRasaData: NSObject {
 		return isActive
 	}
 
-	func cancel()
-	{
-		if (self.loading)
-		{
+	func cancel() {
+		if self.loading {
 			self.setCancelled(true)
 			self.group.wait()
 		}
 	}
 
-	func load(async completion: @escaping () -> Void) -> Bool
-	{
+	func load(async completion: @escaping () -> Void) -> Bool {
 		assert(self.loading == false)
 
 		// Prepare
@@ -73,32 +65,27 @@ class TabulaRasaData: NSObject {
 		let sep: UnicodeScalar = self.type == .csv ? "," : "\t"
 		let separator = Int8(sep.value)
 
-		let source = DSFCSVDataSource.init(fileURL: self.url, icuCodepage: nil, separator: separator)
-		guard let dataSource = source else
-		{
-			return false;
+		let source = DSFCSVDataSource(fileURL: self.url, icuCodepage: nil, separator: separator)
+		guard let dataSource = source else {
+			return false
 		}
 
-		DispatchQueue.global(qos: .userInitiated).async
-		{ [weak self] in
-			if let blockSelf = self
-			{
+		DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+			if let blockSelf = self {
 				blockSelf.load(source: dataSource, completion: completion)
 			}
 		}
 
-		return true;
+		return true
 	}
 
-	private func load(source: DSFCSVDataSource, completion: @escaping () -> Void)
-	{
+	private func load(source: DSFCSVDataSource, completion: @escaping () -> Void) {
 		self.loading = true
 
 		self.group.enter()
 
 		DSFCSVParser.parse(with: source,
-						   fieldCallback: nil)
-		{ (row: UInt, record: [String]) -> Bool in
+						   fieldCallback: nil) { (_: UInt, record: [String]) -> Bool in
 			self.addRecords(record: record)
 			return self.isActive()
 		}
@@ -106,13 +93,11 @@ class TabulaRasaData: NSObject {
 		self.loading = false
 		self.group.leave()
 
-		if self.isActive()
-		{
+		if self.isActive() {
 			/// Only call the completion block if we weren't cancelled
 			DispatchQueue.main.async {
 				completion()
 			}
 		}
 	}
-
 }

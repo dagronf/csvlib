@@ -28,77 +28,70 @@
 
 #include <csv/datasource/IDataSource.hpp>
 
-namespace csv
-{
-	namespace utf8
-	{
-		class DataSource: public csv::IDataSource
-		{
-		public:
-			DataSource() noexcept;
-			
-			char separator = ',';
-			char comment = '\0';
-			
-		protected:
-			bool isSeparator();
-			bool isComment();
-			bool isWhitespace();
-			bool isQuote();
-			bool isEOL();
-			void clear_field();
-			void push();
-			std::string field();
-			
-		protected:
-			char _prev = 0;
-			char _current;
-			
-		private:
-			std::string _field;
-		};
-		
-		class FileDataSource: public utf8::DataSource
-		{
-		public:
-			FileDataSource() noexcept {}
-			FileDataSource(const char* file)
-			{
-				if (!open(file))
-				{
-					throw std::runtime_error("Unable to open file for source");
-				}
-			}
-			bool open(const char* file);
-			
-		public:
-			virtual bool next();
-			virtual void back();
-			
-		private:
-			std::ifstream _in;
-		};
-		
-		class StringDataSource: public utf8::DataSource
-		{
-		public:
-			StringDataSource() noexcept : _offset(-1) {}
-			StringDataSource(const std::string& data)
-			{
-				if (!set(data))
-				{
-					throw std::runtime_error("Unable to set string data for source");
-				}
-			}
-			bool set(const std::string& data);
-			
-		public:
-			virtual bool next();
-			virtual void back();
-			
-		private:
-			size_t _offset;
-			std::string _in;
-		};
-	};
+namespace csv {
+namespace utf8 {
+
+class DataSource: public csv::IDataSource {
+public:
+	DataSource() noexcept;
+
+	char separator = ',';
+	char comment = '\0';
+
+protected:
+	bool isSeparator();
+	bool isComment();
+	bool isWhitespace();
+	bool isQuote();
+	bool isEOL();
+	void clear_field();
+	void push();
+	std::string field();
+
+protected:
+	char _prev = 0;
+	char _current;
+
+private:
+	std::string _field;
+};
+
+class FileDataSource: public utf8::DataSource {
+public:
+	FileDataSource() noexcept {}
+	FileDataSource(const char* file) {
+		if (!open(file)) {
+			throw std::runtime_error("Unable to open file for source");
+		}
+	}
+	bool open(const char* file);
+
+public:
+	virtual bool next();
+	virtual void back();
+
+private:
+	std::ifstream _in;
+};
+
+class StringDataSource: public utf8::DataSource {
+public:
+	StringDataSource() noexcept : _offset(-1) {}
+	StringDataSource(const std::string& data) {
+		if (!set(data)) {
+			throw std::runtime_error("Unable to set string data for source");
+		}
+	}
+	bool set(const std::string& data);
+
+public:
+	virtual bool next();
+	virtual void back();
+
+private:
+	size_t _offset;
+	std::string _in;
+};
+
+};
 };

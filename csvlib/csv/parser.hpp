@@ -26,50 +26,44 @@
 
 #include <functional>
 
-namespace csv
-{
-	typedef enum State
-	{
-		Complete = 0,
-		Cancelled = 1,
-		Error = 2,
-	} State;
+namespace csv {
 
-	struct field
-	{
-		size_t row = 0;
-		size_t column = 0;
-		std::string content;
-	};
+typedef enum State {
+	Complete = 0,
+	Cancelled = 1,
+	Error = 2,
+} State;
 
-	struct record
-	{
-		size_t row = 0;
-		std::vector<field> content;
+struct field {
+	size_t row = 0;
+	size_t column = 0;
+	std::string content;
+};
 
-		inline size_t size() const { return content.size(); }
-		inline const field& operator[](const size_t offset) const { return content[offset]; }
+struct record {
+	size_t row = 0;
+	std::vector<field> content;
 
-		inline void clear() { content.clear(); }
-		inline void add(const field& field) { content.push_back(field); }
+	inline size_t size() const { return content.size(); }
+	inline const field& operator[](const size_t offset) const { return content[offset]; }
 
-		inline bool empty() const
-		{
-			for (const auto& field: content)
-			{
-				if (field.content.length() > 0)
-				{
-					return false;
-				}
+	inline void clear() { content.clear(); }
+	inline void add(const field& field) { content.push_back(field); }
+
+	inline bool empty() const {
+		for (const auto& field: content) {
+			if (field.content.length() > 0) {
+				return false;
 			}
-			return true;
 		}
-	};
+		return true;
+	}
+};
 
-	typedef std::function<bool(const field&)> FieldCallback;
-	typedef std::function<bool(const record&)> RecordCallback;
-	
-	csv::State parse(IDataSource& parser,
-					 csv::FieldCallback emitField,
-					 csv::RecordCallback emitRecord);
+typedef std::function<bool(const field&)> FieldCallback;
+typedef std::function<bool(const record&)> RecordCallback;
+
+csv::State parse(IDataSource& parser,
+				 csv::FieldCallback emitField,
+				 csv::RecordCallback emitRecord);
 };
