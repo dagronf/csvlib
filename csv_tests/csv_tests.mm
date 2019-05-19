@@ -43,8 +43,7 @@
 	// Put teardown code here. This method is called after the invocation of each test method in the class.
 }
 
-std::vector<csv::record> AddRecords(csv::IDataSource& data)
-{
+std::vector<csv::record> AddRecords(csv::IDataSource& data) {
 	std::vector<csv::record> records;
 	auto recordAdder = [&records](const csv::record& record) -> bool {
 		records.push_back(record);
@@ -54,8 +53,7 @@ std::vector<csv::record> AddRecords(csv::IDataSource& data)
 	return records;
 }
 
-std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
-{
+std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount) {
 	std::vector<csv::record> records;
 	auto recordAdder = [&](const csv::record& record) -> bool {
 		assert(record.row == records.size());
@@ -66,8 +64,7 @@ std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount)
 	return records;
 }
 
-std::vector<csv::record> AddRecords(const std::string& str)
-{
+std::vector<csv::record> AddRecords(const std::string& str) {
 	std::vector<csv::record> records;
 
 	csv::utf8::StringDataSource input;
@@ -82,8 +79,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	return records;
 }
 
-- (void)testSimple
-{
+- (void)testSimple {
 	std::vector<csv::record> records;
 
 	csv::utf8::StringDataSource input;
@@ -121,14 +117,12 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	XCTAssertEqual(" fish   ", records[0][2].content);
 }
 
-- (NSURL*)resourceWithName:(NSString*)name extension:(NSString*)extension
-{
+- (NSURL*)resourceWithName:(NSString*)name extension:(NSString*)extension {
 	NSBundle* bundle = [NSBundle bundleForClass:[self class]];
 	return [bundle URLForResource:name withExtension:extension];
 }
 
-- (void)checkRowIndexes:(const std::vector<csv::record>&)records
-{
+- (void)checkRowIndexes:(const std::vector<csv::record>&)records {
 	// Check that the row values match.  This
 	size_t count = 0;
 	for (const auto& record: records)
@@ -137,8 +131,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	}
 }
 
-- (void)testExample
-{
+- (void)testExample {
 	csv::utf8::FileDataSource input;
 
 	NSURL* url = [self resourceWithName:@"orig" extension:@"csv"];
@@ -155,8 +148,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	[self checkRowIndexes:records];
 }
 
-- (void)testExceptions
-{
+- (void)testExceptions {
 	// Invalid filename
 	XCTAssertThrows(csv::utf8::FileDataSource("caterpillar"));
 
@@ -172,8 +164,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	XCTAssertThrows(csv::icu::FileDataSource([url fileSystemRepresentation], "cccc"));
 }
 
-- (void)testRFC
-{
+- (void)testRFC {
 	std::string i26 = "\"aaa\",\"b \r\nbb\",\"ccc\" \r\n	zzz,yyy,xxx";
 	std::vector<csv::record> records = AddRecords(i26);
 
@@ -213,8 +204,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	XCTAssertEqual("xxx", records[1][2].content);
 }
 
-- (void)testWhitespaceBeforeEOL
-{
+- (void)testWhitespaceBeforeEOL {
 	std::vector<csv::record> records;
 
 	csv::utf8::StringDataSource input;
@@ -230,8 +220,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	[self checkRowIndexes:records];
 }
 
-- (void)testQuoting
-{
+- (void)testQuoting {
 	csv::utf8::StringDataSource input;
 	XCTAssertTrue(input.set("\"cat\",     \"dog\"   , \"fish\", \nwhale, pig, snork"));
 	std::vector<csv::record> records = AddRecords(input);
@@ -245,8 +234,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	[self checkRowIndexes:records];
 }
 
-- (void)testComment
-{
+- (void)testComment {
 	csv::utf8::StringDataSource input;
 	input.comment = '#';
 
@@ -274,8 +262,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	[self checkRowIndexes:records];
 }
 
-- (void)testTinyFileSmallerThanUTF8BOM
-{
+- (void)testTinyFileSmallerThanUTF8BOM {
 	// Check filesize less than BOM
 	std::vector<csv::record> records;
 
@@ -288,8 +275,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	XCTAssertEqual("a", records[0][0].content);
 }
 
-- (void)testUTF8BOMRemoval
-{
+- (void)testUTF8BOMRemoval {
 	csv::utf8::StringDataSource input;
 	XCTAssertTrue(input.set("\xEF\xBB\xBF cat, dog, fish"));
 	std::vector<csv::record> records = AddRecords(input);
@@ -319,8 +305,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	[self checkRowIndexes:records];
 }
 
-- (void)testColumnOffsetCounter
-{
+- (void)testColumnOffsetCounter {
 	csv::utf8::StringDataSource input;
 	input.separator = '\t';
 	input.trimLeadingWhitespace = false;
@@ -353,8 +338,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	XCTAssertEqual(3, records[1].size());
 }
 
-- (void)testSeparator
-{
+- (void)testSeparator {
 	csv::utf8::StringDataSource input;
 	input.separator = '\t';
 	input.trimLeadingWhitespace = false;
@@ -369,8 +353,26 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	[self checkRowIndexes:records];
 }
 
-- (void)testExampleMax
-{
+/// I had an issue if the file ended on a separator.  This tests for that.
+- (void)testLastCharacterIsASeparator {
+	csv::utf8::StringDataSource input;
+	input.separator = '\t';
+	input.trimLeadingWhitespace = false;
+
+	// Separator at end of line means an empty field finishes the row
+	// Separator at end of file means that an empty field finishes the file
+	XCTAssertTrue(input.set("cat\tdog\tfish\t\nwhale\tpig\t snork\t"));
+	std::vector<csv::record> records = AddRecords(input);
+
+	XCTAssertEqual(2, records.size());
+	XCTAssertEqual(4, records[0].size());
+	XCTAssertEqual(4, records[1].size());
+
+	// Check that the row values match.
+	[self checkRowIndexes:records];
+}
+
+- (void)testExampleMax {
 	csv::icu::FileDataSource input;
 
 	NSURL* url = [self resourceWithName:@"korean" extension:@"csv"];
@@ -384,8 +386,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	[self checkRowIndexes:records];
 }
 
-- (void)testTotalAColumn
-{
+- (void)testTotalAColumn {
 	csv::icu::FileDataSource input;
 
 	NSURL* url = [self resourceWithName:@"ford_escort" extension:@"csv"];
@@ -395,8 +396,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	size_t count = 0;
 	auto fieldAdder = [&count](const csv::field& field) -> bool {
 		// Add all entries in the mileage column
-		if (field.row != 0 && field.column == 2)
-		{
+		if (field.row != 0 && field.column == 2) {
 			count += std::stoi( field.content );
 		}
 		return true;
@@ -407,8 +407,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	XCTAssertEqual(count, 214642);
 }
 
-- (void)testObjc
-{
+- (void)testObjc {
 	DSFCSVDataSource* source = [DSFCSVDataSource dataSourceWithUTF8String:@"cat, dog, fish, whale\ngoober, nostradamus" separator:','];
 
 	[DSFCSVParser parseWithDataSource:source
@@ -422,8 +421,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 					   }];
 }
 
-- (void)testFileWithBlankLinesAndLineEndingsInQuotedStrings
-{
+- (void)testFileWithBlankLinesAndLineEndingsInQuotedStrings {
 	csv::utf8::FileDataSource input;
 
 	NSURL* url = [self resourceWithName:@"classification" extension:@"csv"];
@@ -450,8 +448,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	[self checkRowIndexes:records];
 }
 
-- (void)testObjcICU
-{
+- (void)testObjcICU {
 	NSURL* url = [self resourceWithName:@"korean" extension:@"csv"];
 	XCTAssertNotNil(url);
 
@@ -470,8 +467,7 @@ std::vector<csv::record> AddRecords(const std::string& str)
 						}];
 }
 
-- (void)testObjcBuiltInGuess
-{
+- (void)testObjcBuiltInGuess {
 	NSURL* url = [self resourceWithName:@"korean-small" extension:@"csv"];
 	XCTAssertNotNil(url);
 
@@ -494,6 +490,28 @@ std::vector<csv::record> AddRecords(const std::string& str)
 	XCTAssertEqualObjects(records[19][3], @"미진사");				// Random middle cell
 	XCTAssertEqualObjects(records[7][5], @"650.4-유14-개정증보판");	// Random middle cell
 	XCTAssertEqualObjects(records[19][7], @"인쇄자료(책자형)");		// Last cell
+}
+
+- (void)testSeparatorAtEndOfLineAndFile {
+	csv::utf8::StringDataSource input;
+	XCTAssertTrue(input.set(",,a,,\n,,b,,\n,,c,,"));
+	std::vector<csv::record> records = AddRecords(input);
+
+	XCTAssertEqual(3, records.size());
+	XCTAssertEqual(5, records[0].size());
+	XCTAssertEqual(5, records[1].size());
+	XCTAssertEqual(5, records[2].size());
+}
+
+- (void)testQuoteAtEndOfLineAndFile {
+	csv::utf8::StringDataSource input;
+	XCTAssertTrue(input.set(",,a,,\n,,b,,\n,,c,,\""));
+	std::vector<csv::record> records = AddRecords(input);
+
+	XCTAssertEqual(3, records.size());
+	XCTAssertEqual(5, records[0].size());
+	XCTAssertEqual(5, records[1].size());
+	XCTAssertEqual(5, records[2].size());
 }
 
 @end
