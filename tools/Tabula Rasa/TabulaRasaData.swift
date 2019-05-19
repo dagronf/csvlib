@@ -55,7 +55,7 @@ class TabulaRasaData: NSObject {
 		}
 	}
 
-	func load(async completion: @escaping () -> Void) -> Bool {
+	func loadAsync(fraction: @escaping (CGFloat) -> Void, completion: @escaping () -> Void) -> Bool {
 		assert(self.loading == false)
 
 		// Prepare
@@ -72,21 +72,24 @@ class TabulaRasaData: NSObject {
 
 		DispatchQueue.global(qos: .userInitiated).async { [weak self] in
 			if let blockSelf = self {
-				blockSelf.load(source: dataSource, completion: completion)
+				blockSelf.load(source: dataSource, completion: completion, fraction: fraction)
 			}
 		}
 
 		return true
 	}
 
-	private func load(source: DSFCSVDataSource, completion: @escaping () -> Void) {
+	private func load(source: DSFCSVDataSource, completion: @escaping () -> Void, fraction: @escaping (CGFloat) -> Void) {
 		self.loading = true
 
 		self.group.enter()
 
 		DSFCSVParser.parse(with: source,
-						   fieldCallback: nil) { (_: UInt, record: [String]) -> Bool in
+						   fieldCallback: nil) { (_: UInt, record: [String], complete: CGFloat) -> Bool in
 			self.addRecords(record: record)
+			DispatchQueue.main.async {
+				fraction(complete)
+			}
 			return self.isActive()
 		}
 

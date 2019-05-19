@@ -13,6 +13,7 @@ class Document: NSDocument {
 
 	@IBOutlet var tableViewController: TabulaRasaTableViewController!
 	@IBOutlet var containingView: NSView!
+	@IBOutlet weak var loadingProgress: NSProgressIndicator!
 
 	override init() {
 		super.init()
@@ -65,9 +66,11 @@ class Document: NSDocument {
 		self.containingView.addSubview(self.tableViewController.view)
 		self.fit(childView: self.tableViewController.view, parentView: self.containingView)
 
-		_ = self.tableData?.load { [weak self] in
+		_ = self.tableData?.loadAsync(fraction: { [weak self] (progress) in
+			self?.loadingProgress.doubleValue = Double(progress)
+		}, completion: { [weak self] in
 			self?.dataLoaded()
-		}
+		})
 	}
 
 	func dataLoaded() {

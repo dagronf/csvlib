@@ -154,14 +154,14 @@ static ReturnState convertError(csv::State state) {
 	};
 
 	// Callback when we receive a record
-	csv::RecordCallback record = [&](const csv::record& record) -> bool {
+	csv::RecordCallback record = [&](const csv::record& record, double progress) -> bool {
 		assert(recordCallback != nil);
 		NSMutableArray<NSString*>* rowData = [NSMutableArray arrayWithCapacity:record.content.size()];
 		for (const auto& field : record.content) {
 			[rowData addObject:[NSString stringWithUTF8String:field.content.c_str()]];
 		}
 		NSArray<NSString*>* result = [rowData copy];
-		return recordCallback(record.row, result) == YES;
+		return recordCallback(record.row, result, progress) == YES;
 	};
 
 	auto state = csv::parse(source,

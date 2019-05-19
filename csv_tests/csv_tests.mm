@@ -45,7 +45,7 @@
 
 std::vector<csv::record> AddRecords(csv::IDataSource& data) {
 	std::vector<csv::record> records;
-	auto recordAdder = [&records](const csv::record& record) -> bool {
+	auto recordAdder = [&records](const csv::record& record, double complete) -> bool {
 		records.push_back(record);
 		return true;
 	};
@@ -55,7 +55,7 @@ std::vector<csv::record> AddRecords(csv::IDataSource& data) {
 
 std::vector<csv::record> AddRecordsMax(csv::IDataSource& data, size_t maxCount) {
 	std::vector<csv::record> records;
-	auto recordAdder = [&](const csv::record& record) -> bool {
+	auto recordAdder = [&](const csv::record& record, double complete) -> bool {
 		assert(record.row == records.size());
 		records.push_back(record);
 		return (record.row != maxCount - 1);
@@ -70,7 +70,7 @@ std::vector<csv::record> AddRecords(const std::string& str) {
 	csv::utf8::StringDataSource input;
 	input.set(str);
 
-	auto recordAdder = [&](const csv::record& record) -> bool {
+	auto recordAdder = [&](const csv::record& record, double complete) -> bool {
 		records.push_back(record);
 		return true;
 	};
@@ -275,9 +275,16 @@ std::vector<csv::record> AddRecords(const std::string& str) {
 	XCTAssertEqual("a", records[0][0].content);
 }
 
+- (void)testUTF8BOMOnly {
+	csv::utf8::StringDataSource input;
+	XCTAssertTrue(input.set("\xEF\xBB\xBF"));
+	std::vector<csv::record> records = AddRecords(input);
+	XCTAssertEqual(0, records.size());
+}
+
 - (void)testUTF8BOMRemoval {
 	csv::utf8::StringDataSource input;
-	XCTAssertTrue(input.set("\xEF\xBB\xBF cat, dog, fish"));
+	XCTAssertTrue(input.set("\xEF\xBB\xBF" "cat, dog, fish"));
 	std::vector<csv::record> records = AddRecords(input);
 
 	XCTAssertEqual(1, records.size());
@@ -321,7 +328,7 @@ std::vector<csv::record> AddRecords(const std::string& str) {
 		return true;
 	};
 
-	auto recordAdder = [&records](const csv::record& record) -> bool {
+	auto recordAdder = [&records](const csv::record& record, double complete) -> bool {
 		records.push_back(record);
 		return true;
 	};
@@ -415,7 +422,7 @@ std::vector<csv::record> AddRecords(const std::string& str) {
 							NSLog(@"Field (%ld, %ld): %@", row, column, field);
 							return YES;
 						}
-					   recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
+					   recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record, CGFloat complete) {
 						   NSLog(@"record:\n%@", record);
 						   return YES;
 					   }];
@@ -461,7 +468,7 @@ std::vector<csv::record> AddRecords(const std::string& str) {
 						fieldCallback:^BOOL(const NSUInteger row, const NSUInteger column, const NSString* field) {
 							// NSLog(@"Field:\n%@", field);
 							return YES;
-						} recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
+						} recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record, CGFloat complete) {
 							// NSLog(@"record:\n%@", record);
 							return YES;
 						}];
@@ -480,7 +487,7 @@ std::vector<csv::record> AddRecords(const std::string& str) {
 
 	[DSFCSVParser parseWithDataSource:source
 						fieldCallback:nil
-					   recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
+					   recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record, CGFloat complete) {
 						   [records addObject:record];
 						   return YES;
 					   }];

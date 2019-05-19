@@ -61,7 +61,7 @@ struct record {
 };
 
 typedef std::function<bool(const field&)> FieldCallback;
-typedef std::function<bool(const record&)> RecordCallback;
+typedef std::function<bool(const record&, double progress)> RecordCallback;
 
 csv::State parse(IDataSource& parser,
 				 csv::FieldCallback emitField,

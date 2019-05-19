@@ -39,14 +39,35 @@ public:
 	char comment = '\0';
 
 protected:
-	bool isSeparator();
-	bool isComment();
-	bool isWhitespace();
-	bool isQuote();
+
+	// Character detection
+	
+	inline bool isSeparator() {
+		return _current == separator;
+	}
+	inline bool isComment() {
+		return comment != '\0' && _current == comment;
+	}
+	inline bool isWhitespace() {
+		return _current == ' ';
+	}
+	inline bool isQuote() {
+		return _current == '\"';
+	}
+
+	// Field related
+
+	inline void clear_field() {
+		_field.clear();
+	}
+	inline std::string field() {
+		return _field;
+	}
+	inline void push() {
+		_field += _current;
+	}
+
 	bool isEOL();
-	void clear_field();
-	void push();
-	std::string field();
 
 protected:
 	char _prev = 0;
@@ -61,7 +82,7 @@ public:
 	FileDataSource() noexcept {}
 	FileDataSource(const char* file) {
 		if (!open(file)) {
-			throw std::runtime_error("Unable to open file for source");
+			throw csv::file_exception();
 		}
 	}
 	bool open(const char* file);
@@ -69,9 +90,11 @@ public:
 public:
 	virtual bool next();
 	virtual void back();
+	virtual double progress();
 
 private:
 	std::ifstream _in;
+	std::streamsize _length;
 };
 
 class StringDataSource: public utf8::DataSource {
@@ -79,7 +102,7 @@ public:
 	StringDataSource() noexcept : _offset(-1) {}
 	StringDataSource(const std::string& data) {
 		if (!set(data)) {
-			throw std::runtime_error("Unable to set string data for source");
+			throw csv::data_exception();
 		}
 	}
 	bool set(const std::string& data);
@@ -87,6 +110,7 @@ public:
 public:
 	virtual bool next();
 	virtual void back();
+	virtual double progress();
 
 private:
 	size_t _offset;

@@ -61,9 +61,10 @@ namespace icu {
 	class FileDataSource: public DataSource {
 	public:
 		FileDataSource() noexcept {}
+		
 		FileDataSource(const std::string& file, const char* codepage) {
 			if (!open(file.c_str(), codepage)) {
-				throw std::runtime_error("Unable to open file for source");
+				throw csv::file_exception();
 			}
 		}
 
@@ -71,11 +72,13 @@ namespace icu {
 		virtual ~FileDataSource();
 
 	protected:
-		bool next();
-		void back();
+		virtual bool next();
+		virtual void back();
+		virtual double progress();
 
 	private:
 		UFILE* _in;
+		long long _length;
 	};
 
 	class StringDataSource: public DataSource {
@@ -83,15 +86,16 @@ namespace icu {
 		StringDataSource() noexcept : _offset(-1) {}
 		StringDataSource(const std::string& data, const char* codepage) {
 			if (!set(data, codepage)) {
-				throw std::runtime_error("Unable to set string data for source");
+				throw csv::data_exception();
 			}
 		}
 
 		bool set(const std::string& text, const char* codepage);
 
 	protected:
-		bool next();
-		void back();
+		virtual bool next();
+		virtual void back();
+		virtual double progress();
 
 	private:
 		U_ICU_NAMESPACE::UnicodeString _in;

@@ -34,22 +34,6 @@ namespace utf8 {
 		_field.reserve(256);
 	}
 
-	bool DataSource::isSeparator() {
-		return _current == separator;
-	}
-
-	bool DataSource::isComment() {
-		return comment != '\0' && _current == comment;
-	}
-
-	bool DataSource::isWhitespace() {
-		return _current == ' ';
-	}
-
-	bool DataSource::isQuote() {
-		return _current == '\"';
-	}
-
 	bool DataSource::isEOL() {
 		if (_current == '\r') {
 			if (next() == false) {
@@ -67,18 +51,6 @@ namespace utf8 {
 		}
 		return false;
 	}
-
-	void DataSource::clear_field() {
-		_field.clear();
-	}
-
-	void DataSource::push() {
-		_field += _current;
-	}
-
-	std::string DataSource::field() {
-		return _field;
-	}
 };
 };
 
@@ -90,6 +62,14 @@ namespace utf8 {
 	bool FileDataSource::open(const char* file) {
 		_in.open(file, std::ios::in | std::ios::binary);
 		if (_in.is_open()) {
+
+			// Get the size
+			_in.ignore( std::numeric_limits<std::streamsize>::max() );
+			_length = _in.gcount();
+			_in.clear();   //  Since ignore will have set eof.
+			_in.seekg( 0, std::ios_base::beg );
+
+
 			// Read the first three bytes.
 			// If the file is less than three bytes, then the get() calls will return nothing
 			char c1, c2, c3;
@@ -103,6 +83,12 @@ namespace utf8 {
 		}
 
 		return _in.is_open();
+	}
+
+	double FileDataSource::progress() {
+		double pos = _in.tellg();
+		double len = _length;
+		return std::min(pos / len, 1.0);
 	}
 
 	bool FileDataSource::next() {
@@ -132,13 +118,20 @@ namespace utf8 {
 		_prev = 0;
 
 		// Check for a BOM and skip it
-		if ((data.length() > 3) &&
+		if ((data.length() > 2) &&
 			(data[0] == '\xEF' && data[1] == '\xBB' && data[2] == '\xBF')) {
 			// We have a BOM. Set the starting offset to AFTER it
+			// (note that the string offset starts at -1, so we need to set offset to 3 - 1)
 			_offset = 2;
 		}
 
 		return true;
+	}
+
+	double StringDataSource::progress() {
+		double pos = _offset;
+		double len = _in.length();
+		return std::min(pos / len, 1.0);
 	}
 
 	bool StringDataSource::next() {

@@ -253,7 +253,7 @@ namespace csv {
 
 			if (!parser.skipBlankLines || !record.empty()) {
 				row++;
-				if (emitRecord && (emitRecord(record) == false)) {
+				if (emitRecord && (emitRecord(record, parser.progress()) == false)) {
 					return State::Complete;
 				}
 			}

@@ -64,7 +64,8 @@ typedef BOOL (^CSVFieldCallback)(const NSUInteger /* row */,
 								 const NSString* _Nonnull /* field content */);
 
 typedef BOOL (^CSVRecordCallback)(const NSUInteger /* row */,
-								  const NSArray<NSString*>* _Nonnull /* row content */);
+								  const NSArray<NSString*>* _Nonnull /* row content */,
+								  const CGFloat);		// progress complete (0.0 -> 1.0)
 
 + (ReturnState)parseWithDataSource:(DSFCSVDataSource* _Nonnull)dataSource
 					 fieldCallback:(CSVFieldCallback _Nullable)fieldCallback

@@ -90,6 +90,13 @@ namespace icu {
 		}
 
 		_in = u_fopen(file, "rb", NULL, file_codepage.c_str());
+		if (_in != NULL) {
+			FILE* internal_file = u_fgetfile(_in);
+			fseek(internal_file, 0L, SEEK_END);
+			_length = ftell(internal_file);
+			fseek(internal_file, 0L, SEEK_SET);
+		}
+
 		return _in != NULL;
 	}
 
@@ -112,6 +119,16 @@ namespace icu {
 		u_fungetc(_current, _in);
 		_current = _prev;
 		_prev = 0;
+	}
+
+	double FileDataSource::progress() {
+		// ICU appears to perform buffering from the underlying file handle in order to optimize reading
+		// As such this method is not byte-accurate as it will depend on how much data ICU buffers during reading
+		// So, for small files the progress will always be 1.0, however for larger files it will chunk.
+		FILE* internal_file = u_fgetfile(_in);
+		double pos = ftell(internal_file);
+		double len = _length;
+		return std::min(pos / len, 1.0);
 	}
 };
 
@@ -148,6 +165,11 @@ namespace icu {
 		_offset--;
 	}
 
+	double StringDataSource::progress() {
+		double pos = _offset;
+		double len = _in.length();
+		return std::min(pos / len, 1.0);
+	}
 };
 };
 

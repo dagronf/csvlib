@@ -27,6 +27,18 @@
 
 namespace csv {
 
+class file_exception: public std::exception {
+	virtual const char* what() const noexcept {
+		return "Unable to open file";
+	}
+};
+
+class data_exception: public std::exception {
+	virtual const char* what() const noexcept {
+		return "Unable to set string data for source";
+	}
+};
+
 class IDataSource {
 
 public:
@@ -35,23 +47,36 @@ public:
 	bool trimLeadingWhitespace = true;
 	bool skipBlankLines = true;
 
+	/// Set to true to cancel the current parsing
 	bool cancelled = false;
 
 	/// Move to the next character.  Returns 'false' if EOF is found
 	virtual bool next() = 0;
-
 	/// Move back a single character
 	virtual void back() = 0;
 
+	/// Is the current character a comment character?
 	virtual bool isComment() = 0;
+	/// Is the current character a separator character?
 	virtual bool isSeparator() = 0;
+	/// Is the current character a whitespace character?
 	virtual bool isWhitespace() = 0;
+	/// Is the current character a double-quote character?
 	virtual bool isQuote() = 0;
+	/// Is the current character the EOL character?
 	virtual bool isEOL() = 0;
 
+	/// Clear the contents of the current field
 	virtual void clear_field() = 0;
+
+	/// Push the current character into the current field
 	virtual void push() = 0;
+
+	/// Returns the UTF-8 representation of current field
 	virtual std::string field() = 0;
+
+	// Progress through parsing (0.0 -> 1.0)
+	virtual double progress() = 0;
 };
 
 };

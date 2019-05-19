@@ -12,8 +12,9 @@ Have you ever just wanted or needed a CSV or TSV parser that :
 4. Handles files or strings in different encodings? (using ICU)
 5. Can choose to ignore blank lines?
 6. Simple callback interface on a per field and/or record basis?
+7. Simple progress support for user feedback?
 
-Well, here's another one!  I got sick and tired of how many times I needed this functionality, went looking online for a good library then discovered that it didn't handle some aspect of the standard.  Or, it required Boost or some other large component that I didn't want to include in my codebase.
+Well, here's another one!  I was surprised how many times I needed this functionality, went looking online for a good library then discovered that it didn't handle some aspect of the csv 'standard'.  Or, it required Boost or some other large component that I didn't want to (or couldn't) include in my codebase.
 
 ## Features
 
@@ -103,7 +104,7 @@ csv::parse(input,
       // Do something with 'field'
       return true;
    },
-      [](const csv::record& record) -> bool {
+   [](const csv::record& record, double progress) -> bool {
       // Do something with 'record'
       return true;
    }
@@ -111,24 +112,24 @@ csv::parse(input,
 
 ```
 
-#### Read only the first 20 records in a file ignoring field callbacks
+#### Read only the first 20 records in a file
 ```cpp
 csv::datasource::utf8::FileDataSource input;
 if (!input.open("<some-csv-file>.csv")) {
    assert(false);
 }
 
-const size_t maxRows = 20;
 csv::parse(input, NULL,
-   [=](const csv::record& record) -> bool {
-      return record.row < maxRows - 1;
+   [](const csv::record& record, double progress) -> bool {
+      // The row count starts at 0, thus the last record we want to read is 20 - 1
+      return record.row < 19;
    }
 );
 ```
 
 #### Use ICU to read CSV from a file with unknown encoding (EUC-KR)
 
-(Requires linking against the appropriate ICU libraries)
+(Requires linking against the appropriate ICU libraries and setting `ALLOW_ICU_EXTENSIONS` preprocessor directive)
 
 ```cpp
 csv::datasource::icu::FileParser parser;
@@ -141,7 +142,7 @@ csv::parse(parser,
       std::cout << "* Field: (" << field.column << " : " << field.content << ")" << std::endl;
       return true;
    },
-   [](const csv::record& record) -> bool {
+   [](const csv::record& record, double progress) -> bool {
       return true;
    }
 );
@@ -158,8 +159,8 @@ csv::parse(parser,
                    NSLog(@"Field:\n%@", field);
                    return YES;
                 } 
-                recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
-                   NSLog(@"Record:\n%@", record);
+                recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record, CGFloat progress) {
+                   NSLog(@"Progress: %lf, Record:\n%@", progress, record);
                    return YES;
                 }];
 ```
@@ -176,8 +177,8 @@ NSData* data = [NSData dataWithContentsOfURL:url];
               NSLog(@"Field:\n%@", field);
               return YES;
           }
-          recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record) {
-              NSLog(@"Record:\n%@", record);
+          recordCallback:^BOOL(const NSUInteger row, const NSArray<NSString*>* record, CGFloat progress) {
+              NSLog(@"Progress: %lf, Record:\n%@", progress, record);
               return YES;
           }];
 ```

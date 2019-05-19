@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="Tabula_Rasa" customModuleProvider="target">
             <connections>
                 <outlet property="containingView" destination="UKG-TE-Pgf" id="JHR-N7-IIQ"/>
+                <outlet property="loadingProgress" destination="ndt-W3-clK" id="Vxp-C0-lmP"/>
                 <outlet property="tableViewController" destination="UEx-Vr-w6Z" id="Pzz-AX-9hw"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="xOd-HO-29H" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -25,13 +27,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="UKG-TE-Pgf">
-                        <rect key="frame" x="20" y="20" width="564" height="456"/>
+                        <rect key="frame" x="20" y="34" width="564" height="442"/>
                     </customView>
+                    <progressIndicator wantsLayer="YES" maxValue="1" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="ndt-W3-clK">
+                        <rect key="frame" x="20" y="7" width="564" height="20"/>
+                    </progressIndicator>
                 </subviews>
                 <constraints>
                     <constraint firstItem="UKG-TE-Pgf" firstAttribute="leading" secondItem="gIp-Ho-8D9" secondAttribute="leading" constant="20" id="I3i-iD-i0b"/>
+                    <constraint firstAttribute="bottom" secondItem="ndt-W3-clK" secondAttribute="bottom" constant="8" id="ZwB-Af-005"/>
+                    <constraint firstItem="ndt-W3-clK" firstAttribute="leading" secondItem="gIp-Ho-8D9" secondAttribute="leading" constant="20" id="fNx-Gs-htD"/>
                     <constraint firstAttribute="trailing" secondItem="UKG-TE-Pgf" secondAttribute="trailing" constant="20" id="kUy-ft-jJi"/>
-                    <constraint firstAttribute="bottom" secondItem="UKG-TE-Pgf" secondAttribute="bottom" constant="20" id="rC6-71-jgl"/>
+                    <constraint firstItem="ndt-W3-clK" firstAttribute="top" secondItem="UKG-TE-Pgf" secondAttribute="bottom" constant="8" id="orZ-JS-UZM"/>
+                    <constraint firstAttribute="trailing" secondItem="ndt-W3-clK" secondAttribute="trailing" constant="20" id="xYm-5G-cRq"/>
                     <constraint firstItem="UKG-TE-Pgf" firstAttribute="top" secondItem="gIp-Ho-8D9" secondAttribute="top" constant="20" id="zzJ-il-5Mz"/>
                 </constraints>
             </view>
