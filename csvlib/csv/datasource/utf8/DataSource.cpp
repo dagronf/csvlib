@@ -34,7 +34,7 @@ namespace utf8 {
 		_field.reserve(256);
 	}
 
-	bool DataSource::isEOL() {
+	bool DataSource::is_eol() {
 		if (_current == '\r') {
 			if (next() == false) {
 				// Hit the end of file.  Return true and let the caller handle it

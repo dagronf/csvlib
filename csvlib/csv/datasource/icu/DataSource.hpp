@@ -40,15 +40,32 @@ namespace icu {
 		UChar32 comment = '\0';
 
 	protected:
-		bool isSeparator();
-		bool isComment();
-		bool isWhitespace();
-		bool isQuote();
-		bool isEOL();
+		virtual bool is_eol();
+		virtual std::string field() const;
 
-		void clear_field();
-		void push();
-		std::string field();
+		inline virtual bool is_separator() const {
+			return _current == separator;
+		}
+
+		inline virtual bool is_comment() const {
+			return comment != '\0' && comment != _current;
+		}
+
+		inline virtual bool is_whitespace() const {
+			return _current == ' ';
+		}
+
+		inline virtual bool is_quote() const {
+			return _current == '\"';
+		}
+
+		inline virtual void clear_field() {
+			_field.remove();
+		}
+
+		inline virtual void push() {
+			_field += _current;
+		}
 
 	protected:
 		UChar32 _prev = 0;

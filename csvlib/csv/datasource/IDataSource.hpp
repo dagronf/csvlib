@@ -39,32 +39,40 @@ class data_exception: public std::exception {
 	}
 };
 
+/// Abstract base class for CSV/TSV data sources
 class IDataSource {
 
 public:
 	virtual ~IDataSource() {}
 
+public:
+
+	/// Remove leading whitespace from fields
 	bool trimLeadingWhitespace = true;
+
+	/// Ignore (step over) blank lines rather than return a blank record for empty lines
 	bool skipBlankLines = true;
 
 	/// Set to true to cancel the current parsing
 	bool cancelled = false;
 
+protected:
+
 	/// Move to the next character.  Returns 'false' if EOF is found
 	virtual bool next() = 0;
-	/// Move back a single character
+	/// Move back a single character.  If at the start of the data source, then no change.
 	virtual void back() = 0;
 
 	/// Is the current character a comment character?
-	virtual bool isComment() = 0;
+	virtual bool is_comment() const = 0;
 	/// Is the current character a separator character?
-	virtual bool isSeparator() = 0;
+	virtual bool is_separator() const = 0;
 	/// Is the current character a whitespace character?
-	virtual bool isWhitespace() = 0;
+	virtual bool is_whitespace() const = 0;
 	/// Is the current character a double-quote character?
-	virtual bool isQuote() = 0;
-	/// Is the current character the EOL character?
-	virtual bool isEOL() = 0;
+	virtual bool is_quote() const = 0;
+	/// Are we at the end of the line?
+	virtual bool is_eol() = 0;
 
 	/// Clear the contents of the current field
 	virtual void clear_field() = 0;
@@ -73,7 +81,7 @@ public:
 	virtual void push() = 0;
 
 	/// Returns the UTF-8 representation of current field
-	virtual std::string field() = 0;
+	virtual std::string field() const = 0;
 
 	// Progress through parsing (0.0 -> 1.0)
 	virtual double progress() = 0;

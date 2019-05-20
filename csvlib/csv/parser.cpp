@@ -38,7 +38,7 @@ namespace {
 	} InternalState;
 
 	bool parseSeparator(csv::IDataSource& parser) {
-		if (parser.isSeparator()) {
+		if (parser.is_separator()) {
 			// If a separator, then move to the next character
 			return parser.next();
 		}
@@ -46,7 +46,7 @@ namespace {
 	}
 
 	void skipWhitespace(csv::IDataSource& parser) {
-		while (parser.isWhitespace() && parser.next()) {
+		while (parser.is_whitespace() && parser.next()) {
 			// Just continue reading.
 		}
 	}
@@ -63,11 +63,11 @@ namespace {
 
 			RETURN_IF_CANCELLED(parser);
 
-			if (parser.isQuote()) {
+			if (parser.is_quote()) {
 				if (!parser.next()) {
 					return InternalState::EndOfFile;
 				}
-				else if (parser.isQuote()) {
+				else if (parser.is_quote()) {
 					// 2DQUOTE -- push the quote into the field.
 					parser.push();
 				}
@@ -76,11 +76,11 @@ namespace {
 					// 1. The next separator
 					// 2. End of line
 					while (true) {
-						if (parser.isEOL()) {
+						if (parser.is_eol()) {
 							return InternalState::EndOfLine;
 						}
 
-						if (parser.isSeparator()) {
+						if (parser.is_separator()) {
 							return InternalState::EndOfField;
 						}
 
@@ -107,18 +107,18 @@ namespace {
 
 			RETURN_IF_CANCELLED(parser);
 
-			if (parser.isSeparator()) {
+			if (parser.is_separator()) {
 				return InternalState::EndOfField;
 			}
-			else if (parser.isEOL()) {
+			else if (parser.is_eol()) {
 				return InternalState::EndOfLine;
 			}
-			else if (parser.isQuote()) {
+			else if (parser.is_quote()) {
 				if (!parser.next()) {
 					return InternalState::EndOfFile;
 				}
 
-				if (parser.isQuote()) {
+				if (parser.is_quote()) {
 					// Double quote. This is fine.
 					parser.push();
 				}
@@ -148,9 +148,9 @@ namespace {
 
 		// If the first character on the line is a comment character, then
 		// skip the line completely.  Only support for single line comments
-		if (isFirstFieldForRow && parser.isComment()) {
+		if (isFirstFieldForRow && parser.is_comment()) {
 			// Skip to end of the line
-			while (!parser.isEOL()) {
+			while (!parser.is_eol()) {
 				if (!parser.next()) {
 					return InternalState::EndOfFile;
 				}
@@ -162,14 +162,14 @@ namespace {
 			skipWhitespace(parser);
 		}
 
-		if (parser.isEOL()) {
+		if (parser.is_eol()) {
 			// Had whitespace before the end of the line, so treat it as
 			// a blank field
 			return InternalState::EndOfLine;
 		}
 
 		InternalState returnState = InternalState::EndOfField;
-		if (parser.isQuote()) {
+		if (parser.is_quote()) {
 			returnState = parseEscapedString(parser);
 		}
 		else {

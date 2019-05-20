@@ -29,23 +29,7 @@
 namespace csv {
 namespace icu {
 
-	bool DataSource::isSeparator() {
-		return _current == separator;
-	}
-
-	bool DataSource::isComment() {
-		return comment != '\0' && comment != _current;
-	}
-
-	bool DataSource::isWhitespace() {
-		return _current == ' ';
-	}
-
-	bool DataSource::isQuote() {
-		return _current == '\"';
-	}
-
-	bool DataSource::isEOL() {
+	bool DataSource::is_eol() {
 		if (_current == '\r') {
 			if (next() == false) {
 				// Hit the end of file.  Return true and let the caller handle it
@@ -63,15 +47,7 @@ namespace icu {
 		return false;
 	}
 
-	void DataSource::clear_field() {
-		_field.remove();
-	}
-
-	void DataSource::push() {
-		_field += _current;
-	}
-
-	std::string DataSource::field() {
+	std::string DataSource::field() const {
 		std::string converted;
 		_field.toUTF8String(converted);
 		return converted;

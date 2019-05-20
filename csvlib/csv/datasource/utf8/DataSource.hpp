@@ -42,32 +42,32 @@ protected:
 
 	// Character detection
 	
-	inline bool isSeparator() {
+	inline virtual bool is_separator() const {
 		return _current == separator;
 	}
-	inline bool isComment() {
+	inline virtual bool is_comment() const {
 		return comment != '\0' && _current == comment;
 	}
-	inline bool isWhitespace() {
+	inline virtual bool is_whitespace() const {
 		return _current == ' ';
 	}
-	inline bool isQuote() {
+	inline virtual bool is_quote() const {
 		return _current == '\"';
 	}
 
 	// Field related
 
-	inline void clear_field() {
+	inline virtual void clear_field() {
 		_field.clear();
 	}
-	inline std::string field() {
+	inline virtual std::string field() const {
 		return _field;
 	}
-	inline void push() {
+	inline virtual void push() {
 		_field += _current;
 	}
 
-	bool isEOL();
+	virtual bool is_eol();
 
 protected:
 	char _prev = 0;
