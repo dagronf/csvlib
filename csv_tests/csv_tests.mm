@@ -521,4 +521,30 @@ std::vector<csv::record> AddRecords(const std::string& str) {
 	XCTAssertEqual(5, records[2].size());
 }
 
+- (void)testException {
+
+	bool caught = false;
+
+	try {
+		csv::utf8::FileDataSource input("/tmp/blah.12345");
+	}
+	catch (const csv::file_exception& e) {
+		caught = true;
+	}
+	XCTAssertTrue(caught, @"Didn't catch file exception");
+
+	// Check ICU exception
+	caught = false;
+	NSURL* url = [self resourceWithName:@"korean-small" extension:@"csv"];
+	XCTAssertNotNil(url);
+
+	try {
+		csv::icu::FileDataSource input(url.fileSystemRepresentation, "asdf");
+	}
+	catch (const csv::file_exception& e) {
+		caught = true;
+	}
+	XCTAssertTrue(caught, @"Didn't catch file exception");
+}
+
 @end

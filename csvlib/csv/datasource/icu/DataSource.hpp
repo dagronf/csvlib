@@ -61,7 +61,8 @@ namespace icu {
 	class FileDataSource: public DataSource {
 	public:
 		FileDataSource() noexcept {}
-		
+
+		/// Throws csv::file_exception if unable to open file or determine codepage
 		FileDataSource(const std::string& file, const char* codepage) {
 			if (!open(file.c_str(), codepage)) {
 				throw csv::file_exception();

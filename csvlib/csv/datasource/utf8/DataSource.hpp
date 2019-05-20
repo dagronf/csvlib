@@ -80,6 +80,8 @@ private:
 class FileDataSource: public utf8::DataSource {
 public:
 	FileDataSource() noexcept {}
+
+	/// Throws csv::file_exception if unable to open file
 	FileDataSource(const char* file) {
 		if (!open(file)) {
 			throw csv::file_exception();

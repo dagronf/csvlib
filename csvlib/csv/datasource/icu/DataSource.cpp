@@ -144,7 +144,7 @@ namespace icu {
 			cp = detected.name;
 		}
 
-		_in = U_ICU_NAMESPACE::UnicodeString(text.c_str(), cp.c_str());
+		_in = U_ICU_NAMESPACE::UnicodeString(text.c_str(), (int)(text.length()), cp.c_str());
 		return true;
 	}
 

@@ -35,7 +35,7 @@ class file_exception: public std::exception {
 
 class data_exception: public std::exception {
 	virtual const char* what() const noexcept {
-		return "Unable to set string data for source";
+		return "Unable to set string data for source for the specified encoding";
 	}
 };
 
