@@ -14,6 +14,7 @@ class Document: NSDocument {
 	@IBOutlet var tableViewController: TabulaRasaTableViewController!
 	@IBOutlet var containingView: NSView!
 	@IBOutlet weak var loadingProgress: NSProgressIndicator!
+	@IBOutlet weak var loadingLabel: NSTextField!
 
 	override init() {
 		super.init()
@@ -70,6 +71,8 @@ class Document: NSDocument {
 			self?.loadingProgress.doubleValue = Double(progress)
 		}, completion: { [weak self] in
 			self?.dataLoaded()
+			self?.loadingLabel.isHidden = true
+			self?.loadingProgress.isHidden = true
 		})
 	}
 
