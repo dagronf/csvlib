@@ -24,6 +24,7 @@
 
 #include <string>
 #include <vector>
+#include <assert.h>
 
 namespace csv {
 
@@ -55,8 +56,6 @@ public:
 
 	/// Set to true to cancel the current parsing
 	bool cancelled = false;
-
-protected:
 
 	/// Move to the next character.  Returns 'false' if EOF is found
 	virtual bool next() = 0;

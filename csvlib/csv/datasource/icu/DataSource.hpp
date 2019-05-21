@@ -26,8 +26,8 @@
 
 #include <csv/datasource/IDataSource.hpp>
 
-#include "unicode/unistr.h"
-#include "unicode/ustdio.h"
+#include <unicode/unistr.h>
+#include <unicode/ustdio.h>
 
 namespace csv {
 namespace icu {

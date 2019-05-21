@@ -22,6 +22,7 @@
 //
 
 #include <stdio.h>
+#include <limits>
 
 #include "DataSource.hpp"
 
