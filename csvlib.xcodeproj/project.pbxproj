@@ -12,6 +12,17 @@
 		238430C121E7F4F6003740F0 /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BC21E7F4F6003740F0 /* libicudata.a */; };
 		238430C221E7F4F6003740F0 /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BD21E7F4F6003740F0 /* libicuuc.a */; };
 		238430C321E7F4F6003740F0 /* libicutu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BE21E7F4F6003740F0 /* libicutu.a */; };
+		23961D182294F6E9004CB7E1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23961D172294F6E8004CB7E1 /* main.cpp */; };
+		23961D232294F773004CB7E1 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA816D2172A447006AC04E /* parser.cpp */; };
+		23961D242294F773004CB7E1 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81752172A450006AC04E /* DataSource.cpp */; };
+		23961D252294F773004CB7E1 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81702172A44F006AC04E /* DataSource.cpp */; };
+		23961D282294F900004CB7E1 /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BC21E7F4F6003740F0 /* libicudata.a */; };
+		23961D292294F900004CB7E1 /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BA21E7F4F6003740F0 /* libicui18n.a */; };
+		23961D2A2294F900004CB7E1 /* libicuio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BB21E7F4F6003740F0 /* libicuio.a */; };
+		23961D2B2294F900004CB7E1 /* libicutu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BE21E7F4F6003740F0 /* libicutu.a */; };
+		23961D2C2294F900004CB7E1 /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BD21E7F4F6003740F0 /* libicuuc.a */; };
+		23961D2D2294F910004CB7E1 /* liblibcsvicu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23961D1F2294F74C004CB7E1 /* liblibcsvicu.a */; };
+		23961D302294FC84004CB7E1 /* command_line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23961D2E2294FC84004CB7E1 /* command_line.cpp */; };
 		23FA818F2172A4E1006AC04E /* csv_tests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 23FA818E2172A4E1006AC04E /* csv_tests.mm */; };
 		23FA81942172A5B1006AC04E /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA816D2172A447006AC04E /* parser.cpp */; };
 		23FA81952172A5B1006AC04E /* DSFCSVParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81712172A450006AC04E /* DSFCSVParser.mm */; };
@@ -41,6 +52,16 @@
 		23FA81F92172B125006AC04E /* korean-small.csv in Resources */ = {isa = PBXBuildFile; fileRef = 23FA81F82172B125006AC04E /* korean-small.csv */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		23961D262294F7E1004CB7E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23FA81592172A3B9006AC04E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 23961D1E2294F74C004CB7E1;
+			remoteInfo = libcsvicu;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		238430B921E7F436003740F0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -50,6 +71,15 @@
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23961D0E2294F6A7004CB7E1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -61,6 +91,39 @@
 		238430BC21E7F4F6003740F0 /* libicudata.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicudata.a; path = ../../../../../usr/local/Cellar/icu4c/63.1/lib/libicudata.a; sourceTree = "<group>"; };
 		238430BD21E7F4F6003740F0 /* libicuuc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicuuc.a; path = ../../../../../usr/local/Cellar/icu4c/63.1/lib/libicuuc.a; sourceTree = "<group>"; };
 		238430BE21E7F4F6003740F0 /* libicutu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicutu.a; path = ../../../../../usr/local/Cellar/icu4c/63.1/lib/libicutu.a; sourceTree = "<group>"; };
+		23961D102294F6A7004CB7E1 /* csv_command_line */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = csv_command_line; sourceTree = BUILT_PRODUCTS_DIR; };
+		23961D172294F6E8004CB7E1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		23961D192294F71A004CB7E1 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		23961D1F2294F74C004CB7E1 /* liblibcsvicu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibcsvicu.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		23961D2E2294FC84004CB7E1 /* command_line.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = command_line.cpp; sourceTree = "<group>"; };
+		23961D2F2294FC84004CB7E1 /* command_line.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = command_line.hpp; sourceTree = "<group>"; };
+		23B5BE0B2295317E00DACF8F /* CmdLineOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdLineOutput.h; sourceTree = "<group>"; };
+		23B5BE0C2295317E00DACF8F /* ZshCompletionOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZshCompletionOutput.h; sourceTree = "<group>"; };
+		23B5BE0D2295317E00DACF8F /* UnlabeledMultiArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlabeledMultiArg.h; sourceTree = "<group>"; };
+		23B5BE0E2295317E00DACF8F /* sstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sstream.h; sourceTree = "<group>"; };
+		23B5BE0F2295317E00DACF8F /* MultiArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiArg.h; sourceTree = "<group>"; };
+		23B5BE102295317E00DACF8F /* IgnoreRestVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IgnoreRestVisitor.h; sourceTree = "<group>"; };
+		23B5BE112295317E00DACF8F /* XorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XorHandler.h; sourceTree = "<group>"; };
+		23B5BE122295317E00DACF8F /* Arg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arg.h; sourceTree = "<group>"; };
+		23B5BE132295317E00DACF8F /* HelpVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpVisitor.h; sourceTree = "<group>"; };
+		23B5BE142295317E00DACF8F /* StdOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StdOutput.h; sourceTree = "<group>"; };
+		23B5BE152295317E00DACF8F /* ArgTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgTraits.h; sourceTree = "<group>"; };
+		23B5BE162295317E00DACF8F /* CmdLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdLine.h; sourceTree = "<group>"; };
+		23B5BE172295317E00DACF8F /* DocBookOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocBookOutput.h; sourceTree = "<group>"; };
+		23B5BE182295317E00DACF8F /* StandardTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardTraits.h; sourceTree = "<group>"; };
+		23B5BE192295317E00DACF8F /* Visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
+		23B5BE1A2295317E00DACF8F /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
+		23B5BE1B2295317E00DACF8F /* VersionVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionVisitor.h; sourceTree = "<group>"; };
+		23B5BE1C2295317E00DACF8F /* ValueArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueArg.h; sourceTree = "<group>"; };
+		23B5BE1D2295317E00DACF8F /* ValuesConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuesConstraint.h; sourceTree = "<group>"; };
+		23B5BE1E2295317E00DACF8F /* UnlabeledValueArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlabeledValueArg.h; sourceTree = "<group>"; };
+		23B5BE1F2295317E00DACF8F /* Constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constraint.h; sourceTree = "<group>"; };
+		23B5BE202295317E00DACF8F /* CmdLineInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdLineInterface.h; sourceTree = "<group>"; };
+		23B5BE212295317E00DACF8F /* SwitchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchArg.h; sourceTree = "<group>"; };
+		23B5BE222295317E00DACF8F /* OptionalUnlabeledTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionalUnlabeledTracker.h; sourceTree = "<group>"; };
+		23B5BE232295317E00DACF8F /* MultiSwitchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSwitchArg.h; sourceTree = "<group>"; };
+		23B5BE242295317E00DACF8F /* ArgException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgException.h; sourceTree = "<group>"; };
+		23B5BE252295317E00DACF8F /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 		23FA816D2172A447006AC04E /* parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = csvlib/csv/parser.cpp; sourceTree = SOURCE_ROOT; };
 		23FA816F2172A447006AC04E /* parser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = parser.hpp; path = csvlib/csv/parser.hpp; sourceTree = SOURCE_ROOT; };
 		23FA81702172A44F006AC04E /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataSource.cpp; path = csvlib/csv/datasource/icu/DataSource.cpp; sourceTree = SOURCE_ROOT; };
@@ -100,6 +163,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		23961D0D2294F6A7004CB7E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23961D2D2294F910004CB7E1 /* liblibcsvicu.a in Frameworks */,
+				23961D282294F900004CB7E1 /* libicudata.a in Frameworks */,
+				23961D292294F900004CB7E1 /* libicui18n.a in Frameworks */,
+				23961D2A2294F900004CB7E1 /* libicuio.a in Frameworks */,
+				23961D2B2294F900004CB7E1 /* libicutu.a in Frameworks */,
+				23961D2C2294F900004CB7E1 /* libicuuc.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23961D1D2294F74C004CB7E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		23FA81892172A4E1006AC04E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -166,6 +249,67 @@
 			path = csv;
 			sourceTree = "<group>";
 		};
+		23961D112294F6A7004CB7E1 /* csv_command_line */ = {
+			isa = PBXGroup;
+			children = (
+				23B5BE082295317E00DACF8F /* tclap */,
+				23961D172294F6E8004CB7E1 /* main.cpp */,
+				23961D2E2294FC84004CB7E1 /* command_line.cpp */,
+				23961D2F2294FC84004CB7E1 /* command_line.hpp */,
+			);
+			path = csv_command_line;
+			sourceTree = "<group>";
+		};
+		23B5BE082295317E00DACF8F /* tclap */ = {
+			isa = PBXGroup;
+			children = (
+				23B5BE092295317E00DACF8F /* include */,
+			);
+			path = tclap;
+			sourceTree = "<group>";
+		};
+		23B5BE092295317E00DACF8F /* include */ = {
+			isa = PBXGroup;
+			children = (
+				23B5BE0A2295317E00DACF8F /* tclap */,
+				23B5BE252295317E00DACF8F /* Makefile.am */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		23B5BE0A2295317E00DACF8F /* tclap */ = {
+			isa = PBXGroup;
+			children = (
+				23B5BE0B2295317E00DACF8F /* CmdLineOutput.h */,
+				23B5BE0C2295317E00DACF8F /* ZshCompletionOutput.h */,
+				23B5BE0D2295317E00DACF8F /* UnlabeledMultiArg.h */,
+				23B5BE0E2295317E00DACF8F /* sstream.h */,
+				23B5BE0F2295317E00DACF8F /* MultiArg.h */,
+				23B5BE102295317E00DACF8F /* IgnoreRestVisitor.h */,
+				23B5BE112295317E00DACF8F /* XorHandler.h */,
+				23B5BE122295317E00DACF8F /* Arg.h */,
+				23B5BE132295317E00DACF8F /* HelpVisitor.h */,
+				23B5BE142295317E00DACF8F /* StdOutput.h */,
+				23B5BE152295317E00DACF8F /* ArgTraits.h */,
+				23B5BE162295317E00DACF8F /* CmdLine.h */,
+				23B5BE172295317E00DACF8F /* DocBookOutput.h */,
+				23B5BE182295317E00DACF8F /* StandardTraits.h */,
+				23B5BE192295317E00DACF8F /* Visitor.h */,
+				23B5BE1A2295317E00DACF8F /* Makefile.am */,
+				23B5BE1B2295317E00DACF8F /* VersionVisitor.h */,
+				23B5BE1C2295317E00DACF8F /* ValueArg.h */,
+				23B5BE1D2295317E00DACF8F /* ValuesConstraint.h */,
+				23B5BE1E2295317E00DACF8F /* UnlabeledValueArg.h */,
+				23B5BE1F2295317E00DACF8F /* Constraint.h */,
+				23B5BE202295317E00DACF8F /* CmdLineInterface.h */,
+				23B5BE212295317E00DACF8F /* SwitchArg.h */,
+				23B5BE222295317E00DACF8F /* OptionalUnlabeledTracker.h */,
+				23B5BE232295317E00DACF8F /* MultiSwitchArg.h */,
+				23B5BE242295317E00DACF8F /* ArgException.h */,
+			);
+			path = tclap;
+			sourceTree = "<group>";
+		};
 		23FA81582172A3B9006AC04E = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +328,8 @@
 			children = (
 				23FA818C2172A4E1006AC04E /* csv_tests.xctest */,
 				23FA81C92172A70C006AC04E /* Tabula Rasa.app */,
+				23961D102294F6A7004CB7E1 /* csv_command_line */,
+				23961D1F2294F74C004CB7E1 /* liblibcsvicu.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -210,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				23FA817A2172A4A9006AC04E /* Tabula Rasa */,
+				23961D112294F6A7004CB7E1 /* csv_command_line */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -246,6 +393,7 @@
 		23FA81982172A62B006AC04E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				23961D192294F71A004CB7E1 /* libicucore.tbd */,
 				238430BC21E7F4F6003740F0 /* libicudata.a */,
 				238430BA21E7F4F6003740F0 /* libicui18n.a */,
 				238430BB21E7F4F6003740F0 /* libicuio.a */,
@@ -275,7 +423,52 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		23961D1B2294F74C004CB7E1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		23961D0F2294F6A7004CB7E1 /* csv_command_line */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23961D162294F6A7004CB7E1 /* Build configuration list for PBXNativeTarget "csv_command_line" */;
+			buildPhases = (
+				23961D0C2294F6A7004CB7E1 /* Sources */,
+				23961D0D2294F6A7004CB7E1 /* Frameworks */,
+				23961D0E2294F6A7004CB7E1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				23961D272294F7E1004CB7E1 /* PBXTargetDependency */,
+			);
+			name = csv_command_line;
+			productName = csv_command_line;
+			productReference = 23961D102294F6A7004CB7E1 /* csv_command_line */;
+			productType = "com.apple.product-type.tool";
+		};
+		23961D1E2294F74C004CB7E1 /* libcsvicu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23961D202294F74C004CB7E1 /* Build configuration list for PBXNativeTarget "libcsvicu" */;
+			buildPhases = (
+				23961D1B2294F74C004CB7E1 /* Headers */,
+				23961D1C2294F74C004CB7E1 /* Sources */,
+				23961D1D2294F74C004CB7E1 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libcsvicu;
+			productName = libcsvicu;
+			productReference = 23961D1F2294F74C004CB7E1 /* liblibcsvicu.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		23FA818B2172A4E1006AC04E /* csv_tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 23FA81912172A4E1006AC04E /* Build configuration list for PBXNativeTarget "csv_tests" */;
@@ -321,6 +514,12 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Darren Ford";
 				TargetAttributes = {
+					23961D0F2294F6A7004CB7E1 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					23961D1E2294F74C004CB7E1 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 					23FA818B2172A4E1006AC04E = {
 						CreatedOnToolsVersion = 10.0;
 					};
@@ -344,6 +543,8 @@
 			targets = (
 				23FA818B2172A4E1006AC04E /* csv_tests */,
 				23FA81C82172A70C006AC04E /* Tabula Rasa */,
+				23961D1E2294F74C004CB7E1 /* libcsvicu */,
+				23961D0F2294F6A7004CB7E1 /* csv_command_line */,
 			);
 		};
 /* End PBXProject section */
@@ -375,6 +576,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		23961D0C2294F6A7004CB7E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23961D182294F6E9004CB7E1 /* main.cpp in Sources */,
+				23961D302294FC84004CB7E1 /* command_line.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23961D1C2294F74C004CB7E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23961D232294F773004CB7E1 /* parser.cpp in Sources */,
+				23961D242294F773004CB7E1 /* DataSource.cpp in Sources */,
+				23961D252294F773004CB7E1 /* DataSource.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		23FA81882172A4E1006AC04E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -404,6 +624,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		23961D272294F7E1004CB7E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 23961D1E2294F74C004CB7E1 /* libcsvicu */;
+			targetProxy = 23961D262294F7E1004CB7E1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		23FA817D2172A4A9006AC04E /* Document.xib */ = {
 			isa = PBXVariantGroup;
@@ -424,13 +652,85 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		23961D142294F6A7004CB7E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3L6RK3LGGW;
+				FRAMEWORK_SEARCH_PATHS = "../csvlib/**";
+				HEADER_SEARCH_PATHS = "../csvlib/**";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/icu4c/63.1/include,
+					csvlib/,
+				);
+			};
+			name = Debug;
+		};
+		23961D152294F6A7004CB7E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3L6RK3LGGW;
+				FRAMEWORK_SEARCH_PATHS = "../csvlib/**";
+				HEADER_SEARCH_PATHS = "../csvlib/**";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/icu4c/63.1/include,
+					csvlib/,
+				);
+			};
+			name = Release;
+		};
+		23961D212294F74C004CB7E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3L6RK3LGGW;
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = "../csvlib/**";
+				HEADER_SEARCH_PATHS = "../csvlib/**";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/icu4c/63.1/include,
+					csvlib/,
+				);
+			};
+			name = Debug;
+		};
+		23961D222294F74C004CB7E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3L6RK3LGGW;
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = "../csvlib/**";
+				HEADER_SEARCH_PATHS = "../csvlib/**";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/icu4c/63.1/include,
+					csvlib/,
+				);
+			};
+			name = Release;
+		};
 		23FA81662172A3B9006AC04E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -466,6 +766,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					ALLOW_ICU_EXTENSIONS,
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -489,7 +790,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -522,6 +823,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = ALLOW_ICU_EXTENSIONS;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -658,6 +960,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		23961D162294F6A7004CB7E1 /* Build configuration list for PBXNativeTarget "csv_command_line" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23961D142294F6A7004CB7E1 /* Debug */,
+				23961D152294F6A7004CB7E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23961D202294F74C004CB7E1 /* Build configuration list for PBXNativeTarget "libcsvicu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23961D212294F74C004CB7E1 /* Debug */,
+				23961D222294F74C004CB7E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		23FA815C2172A3B9006AC04E /* Build configuration list for PBXProject "csvlib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

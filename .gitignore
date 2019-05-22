@@ -1,3 +1,8 @@
 csvlib.xcodeproj/xcuserdata
 csvlib.xcodeproj/project.xcworkspace/xcuserdata
 sample_files
+_build
+.vscode/ipch
+csv_command_line/.vscode/ipch
+tools/csv_command_line/.vscode/ipch
+_mac
