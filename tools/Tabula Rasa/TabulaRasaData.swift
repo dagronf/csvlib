@@ -81,26 +81,38 @@ class TabulaRasaData: NSObject {
 
 	private func load(source: DSFCSVDataSource, completion: @escaping () -> Void, fraction: @escaping (CGFloat) -> Void) {
 		self.loading = true
-
 		self.group.enter()
 
 		DSFCSVParser.parse(with: source,
-						   fieldCallback: nil) { (_: UInt, record: [String], complete: CGFloat) -> Bool in
-			self.addRecords(record: record)
+						   fieldCallback: nil) { [weak self] (rowIndex: UInt, record: [String], complete: CGFloat) -> Bool in
+			self?.addRecords(record: record)
+
 			DispatchQueue.main.async {
 				fraction(complete)
 			}
-			return self.isActive()
+			return (self?.isActive())!
 		}
 
 		self.loading = false
 		self.group.leave()
 
+
+
 		if self.isActive() {
-			/// Only call the completion block if we weren't cancelled
+//			self.createIndex()
+//			/// Only call the completion block if we weren't cancelled
 			DispatchQueue.main.async {
 				completion()
 			}
 		}
 	}
+
+
+//	public func find(text: String) -> [DFSearchIndex.SearchResult] {
+////		guard self.indexed == true else {
+////			return []
+////		}
+//
+//		return self.indexer.search(text)
+//	}
 }

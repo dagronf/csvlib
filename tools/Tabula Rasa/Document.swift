@@ -15,7 +15,13 @@ class Document: NSDocument {
 	@IBOutlet var containingView: NSView!
 	@IBOutlet weak var loadingProgress: NSProgressIndicator!
 	@IBOutlet weak var loadingLabel: NSTextField!
+	@IBOutlet weak var searchResultCountField: NSTextField!
+	
+	@IBOutlet weak var searchProgress: NSProgressIndicator!
+	private let indexer = DFSearchIndex.Memory.Create()!
 
+	private var isClosing = false
+	
 	override init() {
 		super.init()
 		// Add your subclass-specific initialization here.
@@ -47,10 +53,23 @@ class Document: NSDocument {
 	}
 
 	override func close() {
+		self.isClosing = true
 		if let tableData = self.tableData {
 			tableData.cancel()
 		}
 		super.close()
+	}
+
+	@IBAction func performSearch(_ sender: NSSearchField) {
+		let str = sender.stringValue
+		let results = self.find(text: str)
+		self.searchResultCountField.stringValue = "\(results.count) result(s)"
+		self.tableViewController.highlightSearchResults(results: results)
+	}
+
+	@IBAction func changeMatchedSearch(_ sender: NSSegmentedControl) {
+		let forward = sender.selectedSegment == 1
+		self.tableViewController.moveToNextMatch(forwards: forward)
 	}
 
 	private func fit(childView: NSView, parentView: NSView) {
@@ -64,19 +83,71 @@ class Document: NSDocument {
 	override func windowControllerDidLoadNib(_: NSWindowController) {
 		self.tableViewController.loadView()
 
+		self.searchProgress.startAnimation(self)
+
 		self.containingView.addSubview(self.tableViewController.view)
 		self.fit(childView: self.tableViewController.view, parentView: self.containingView)
 
 		_ = self.tableData?.loadAsync(fraction: { [weak self] (progress) in
 			self?.loadingProgress.doubleValue = Double(progress)
 		}, completion: { [weak self] in
-			self?.dataLoaded()
-			self?.loadingLabel.isHidden = true
-			self?.loadingProgress.isHidden = true
+			DispatchQueue.main.async {
+				self?.dataLoaded()
+			}
 		})
 	}
 
-	func dataLoaded() {
+	private func dataLoaded() {
 		self.tableViewController.update(source: self.tableData!)
+		self.loadingLabel.isHidden = true
+		self.loadingProgress.isHidden = true
+
+		self.createIndex()
 	}
+
+	private func generateIndex() {
+		DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+
+			var count = 0
+
+			for row in self!.tableData!.rawData.enumerated() {
+				if self!.isClosing {
+					return
+				}
+				for field in row.element.enumerated() {
+					if self!.isClosing {
+						return
+					}
+					_ = self?.indexer.add(textURL: "field://\(row.offset):\(field.offset)", text: field.element)
+				}
+				count += 1
+				DispatchQueue.main.async {
+					self?.searchProgress.doubleValue = Double(count)
+				}
+
+				// Only flush to the index every 1000 records so
+				if row.offset % 1000 == 0 {
+					self?.indexer.flush()
+				}
+			}
+
+			self?.indexer.flush()
+			self?.indexer.compact()
+			self?.searchProgress.isHidden = true
+		}
+	}
+
+	private func createIndex() {
+
+		let total = self.tableData!.rawData.count
+		self.searchProgress.minValue = 0
+		self.searchProgress.maxValue = Double(total)
+		self.generateIndex()
+	}
+
+	public func find(text: String) -> [DFSearchIndex.SearchResult] {
+		return self.indexer.search(text)
+	}
+
+
 }

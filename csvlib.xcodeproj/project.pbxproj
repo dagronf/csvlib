@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23600794229612F700AE9235 /* DFSearchIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23600791229612F700AE9235 /* DFSearchIndex.swift */; };
+		23600795229612F700AE9235 /* DFSearchIndex.Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23600792229612F700AE9235 /* DFSearchIndex.Memory.swift */; };
+		23600796229612F700AE9235 /* DFSearchIndex.File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23600793229612F700AE9235 /* DFSearchIndex.File.swift */; };
 		238430BF21E7F4F6003740F0 /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BA21E7F4F6003740F0 /* libicui18n.a */; };
 		238430C021E7F4F6003740F0 /* libicuio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BB21E7F4F6003740F0 /* libicuio.a */; };
 		238430C121E7F4F6003740F0 /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BC21E7F4F6003740F0 /* libicudata.a */; };
@@ -84,6 +87,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		23600791229612F700AE9235 /* DFSearchIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFSearchIndex.swift; sourceTree = "<group>"; };
+		23600792229612F700AE9235 /* DFSearchIndex.Memory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFSearchIndex.Memory.swift; sourceTree = "<group>"; };
+		23600793229612F700AE9235 /* DFSearchIndex.File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFSearchIndex.File.swift; sourceTree = "<group>"; };
 		236F3B652173051A00A5BB57 /* IDataSource.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IDataSource.hpp; sourceTree = "<group>"; };
 		23708B572183A88F00A6994F /* Encoding.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Encoding.hpp; sourceTree = "<group>"; };
 		238430BA21E7F4F6003740F0 /* libicui18n.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicui18n.a; path = ../../../../../usr/local/Cellar/icu4c/63.1/lib/libicui18n.a; sourceTree = "<group>"; };
@@ -210,6 +216,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2360078A2295FCEB00AE9235 /* DFSearchKit */ = {
+			isa = PBXGroup;
+			children = (
+				23600793229612F700AE9235 /* DFSearchIndex.File.swift */,
+				23600792229612F700AE9235 /* DFSearchIndex.Memory.swift */,
+				23600791229612F700AE9235 /* DFSearchIndex.swift */,
+			);
+			path = DFSearchKit;
+			sourceTree = "<group>";
+		};
 		236F3B5F2172FBA200A5BB57 /* objc */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +380,7 @@
 		23FA817A2172A4A9006AC04E /* Tabula Rasa */ = {
 			isa = PBXGroup;
 			children = (
+				2360078A2295FCEB00AE9235 /* DFSearchKit */,
 				23FA817B2172A4A9006AC04E /* TabulaRasaTableViewController.xib */,
 				23FA817C2172A4A9006AC04E /* Assets.xcassets */,
 				23FA817D2172A4A9006AC04E /* Document.xib */,
@@ -611,13 +628,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23600795229612F700AE9235 /* DFSearchIndex.Memory.swift in Sources */,
 				23FA81EF2172A8D0006AC04E /* Document.swift in Sources */,
 				23FA81ED2172A8CD006AC04E /* AppDelegate.swift in Sources */,
 				23FA81EE2172A8CD006AC04E /* TabulaRasaTableViewController.swift in Sources */,
 				23FA81EC2172A8CD006AC04E /* TabulaRasaData.swift in Sources */,
 				23FA81E82172A7E8006AC04E /* parser.cpp in Sources */,
 				23FA81EB2172A7ED006AC04E /* DataSource.cpp in Sources */,
+				23600796229612F700AE9235 /* DFSearchIndex.File.swift in Sources */,
 				23FA81EA2172A7ED006AC04E /* DataSource.cpp in Sources */,
+				23600794229612F700AE9235 /* DFSearchIndex.swift in Sources */,
 				23FA81E92172A7ED006AC04E /* DSFCSVParser.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -854,12 +874,12 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/opt/icu4c/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.csv-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/63.1/include,
+					/usr/local/opt/icu4c/include,
 					csvlib/,
 				);
 			};
@@ -879,12 +899,12 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/opt/icu4c/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.csv-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/63.1/include,
+					/usr/local/opt/icu4c/include,
 					csvlib/,
 				);
 			};
