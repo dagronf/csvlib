@@ -23,6 +23,7 @@
 
 #include <stdio.h>
 #include <limits>
+#include <array>
 
 #include "DataSource.hpp"
 
@@ -30,6 +31,10 @@
 
 namespace csv {
 namespace utf8 {
+
+	// BOM definitions
+	static const std::string _BOMS = { '\xEF', '\xBB', '\xBF' };
+	static const size_t _BOMS_SIZE = 3;
 
 	DataSource::DataSource() noexcept {
 		_field.reserve(256);
@@ -60,7 +65,21 @@ namespace utf8 {
 namespace csv {
 namespace utf8 {
 
+	FileDataSource::~FileDataSource() {
+		close();
+	}
+
+	void FileDataSource::close() {
+		if (_in.is_open()) {
+			_in.close();
+		}
+	}
+
 	bool FileDataSource::open(const char* file) {
+
+		// If we have one open, close it first
+		close();
+
 		_in.open(file, std::ios::in | std::ios::binary);
 		if (_in.is_open()) {
 
@@ -70,16 +89,19 @@ namespace utf8 {
 			_in.clear();   //  Since ignore will have set eof.
 			_in.seekg( 0, std::ios_base::beg );
 
+			if (_length < _BOMS_SIZE) {
+				// If we have less chars in the file than the size of the BOM.
+				return true;
+			}
 
-			// Read the first three bytes.
-			// If the file is less than three bytes, then the get() calls will return nothing
-			char c1, c2, c3;
-			_in.get(c1);
-			_in.get(c2);
-			_in.get(c3);
-			if (c1 != '\xEF' || c2 != '\xBB' || c3 != '\xBF') {
-				// No BOM.  Rewind to the start of the file
-				_in.seekg(0);
+			// Check if we have a BOM - Read the first three bytes.
+			std::array<char, _BOMS_SIZE> utf8BOM;
+			std::fill(utf8BOM.begin(), utf8BOM.end(), 0);
+			_in.read(utf8BOM.data(), utf8BOM.size());
+
+			if (memcmp(_BOMS.c_str(), utf8BOM.data(), _BOMS_SIZE) != 0) {
+				_in.clear();					// clear fail and eof bits
+				_in.seekg(0, std::ios::beg);	// back to the start!
 			}
 		}
 
@@ -119,8 +141,12 @@ namespace utf8 {
 		_prev = 0;
 
 		// Check for a BOM and skip it
-		if ((data.length() > 2) &&
-			(data[0] == '\xEF' && data[1] == '\xBB' && data[2] == '\xBF')) {
+		if (data.length() < _BOMS.size()) {
+			// Cannot possibly have a BOM
+			return true;
+		}
+
+		if (memcmp(data.c_str(), _BOMS.c_str(), _BOMS.size()) == 0) {
 			// We have a BOM. Set the starting offset to AFTER it
 			// (note that the string offset starts at -1, so we need to set offset to 3 - 1)
 			_offset = 2;

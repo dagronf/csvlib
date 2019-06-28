@@ -280,6 +280,32 @@ std::vector<csv::record> AddRecords(const std::string& str) {
 	XCTAssertTrue(input.set("\xEF\xBB\xBF"));
 	std::vector<csv::record> records = AddRecords(input);
 	XCTAssertEqual(0, records.size());
+
+	// Check for a source that has the same number of characters as the BOM works as expected
+	csv::utf8::StringDataSource input2;
+	XCTAssertTrue(input2.set("8,9"));
+	std::vector<csv::record> records2 = AddRecords(input2);
+	XCTAssertEqual(1, records2.size());
+	XCTAssertEqual(1, records2[0].size() == 2);
+	XCTAssertEqual("8", records2[0][0].content);
+	XCTAssertEqual("9", records2[0][1].content);
+
+	// Input with two fields, one empty
+	csv::utf8::StringDataSource input3;
+	XCTAssertTrue(input3.set(",5"));
+	std::vector<csv::record> records3 = AddRecords(input3);
+	XCTAssertEqual(1, records3.size());
+	XCTAssertEqual(1, records3[0].size() == 2);
+	XCTAssertEqual("", records3[0][0].content);
+	XCTAssertEqual("5", records3[0][1].content);
+
+	/// Input with a single character
+	csv::utf8::StringDataSource input4;
+	XCTAssertTrue(input4.set("4"));
+	std::vector<csv::record> records4 = AddRecords(input4);
+	XCTAssertEqual(1, records4.size());
+	XCTAssertEqual(1, records4[0].size() == 1);
+	XCTAssertEqual("4", records4[0][0].content);
 }
 
 - (void)testUTF8BOMRemoval {
@@ -310,6 +336,23 @@ std::vector<csv::record> AddRecords(const std::string& str) {
 
 	// Check that the row values match.  This
 	[self checkRowIndexes:records];
+}
+
+- (void)testVerySmallSampleDataWithoutBOM {
+	csv::utf8::FileDataSource parser;
+	NSURL* url1 = [self resourceWithName:@"small_sample" extension:@"tsv"];
+	XCTAssertTrue(parser.open([url1 fileSystemRepresentation]));
+	std::vector<csv::record> records = AddRecords(parser);
+	XCTAssertEqual(1, records.size());
+	XCTAssertEqual("1", records[0][0].content);
+	XCTAssertEqual("", records[0][1].content);
+
+	NSURL* url2 = [self resourceWithName:@"small_sample_equal_not_equal_bom" extension:@"tsv"];
+	XCTAssertTrue(parser.open([url2 fileSystemRepresentation]));
+	records = AddRecords(parser);
+	XCTAssertEqual(1, records.size());
+	XCTAssertEqual("r", records[0][0].content);
+	XCTAssertEqual("t", records[0][1].content);
 }
 
 - (void)testColumnOffsetCounter {

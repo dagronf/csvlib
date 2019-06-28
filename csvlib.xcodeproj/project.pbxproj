@@ -26,6 +26,8 @@
 		23961D2C2294F900004CB7E1 /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 238430BD21E7F4F6003740F0 /* libicuuc.a */; };
 		23961D2D2294F910004CB7E1 /* liblibcsvicu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23961D1F2294F74C004CB7E1 /* liblibcsvicu.a */; };
 		23961D302294FC84004CB7E1 /* command_line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23961D2E2294FC84004CB7E1 /* command_line.cpp */; };
+		23BEF31F22C5A68B0089CFCA /* small_sample.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 23BEF31E22C5A68B0089CFCA /* small_sample.tsv */; };
+		23BEF32122C5AF010089CFCA /* small_sample_equal_not_equal_bom.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 23BEF32022C5AF010089CFCA /* small_sample_equal_not_equal_bom.tsv */; };
 		23FA818F2172A4E1006AC04E /* csv_tests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 23FA818E2172A4E1006AC04E /* csv_tests.mm */; };
 		23FA81942172A5B1006AC04E /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23FA816D2172A447006AC04E /* parser.cpp */; };
 		23FA81952172A5B1006AC04E /* DSFCSVParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 23FA81712172A450006AC04E /* DSFCSVParser.mm */; };
@@ -130,6 +132,8 @@
 		23B5BE232295317E00DACF8F /* MultiSwitchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSwitchArg.h; sourceTree = "<group>"; };
 		23B5BE242295317E00DACF8F /* ArgException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgException.h; sourceTree = "<group>"; };
 		23B5BE252295317E00DACF8F /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
+		23BEF31E22C5A68B0089CFCA /* small_sample.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = small_sample.tsv; sourceTree = "<group>"; };
+		23BEF32022C5AF010089CFCA /* small_sample_equal_not_equal_bom.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = small_sample_equal_not_equal_bom.tsv; sourceTree = "<group>"; };
 		23FA816D2172A447006AC04E /* parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = csvlib/csv/parser.cpp; sourceTree = SOURCE_ROOT; };
 		23FA816F2172A447006AC04E /* parser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = parser.hpp; path = csvlib/csv/parser.hpp; sourceTree = SOURCE_ROOT; };
 		23FA81702172A44F006AC04E /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataSource.cpp; path = csvlib/csv/datasource/icu/DataSource.cpp; sourceTree = SOURCE_ROOT; };
@@ -434,6 +438,8 @@
 				23FA81A62172A655006AC04E /* classification.csv */,
 				23FA81A72172A655006AC04E /* simple_csv_utf8_bom.tsv */,
 				23FA81A82172A655006AC04E /* orig.csv */,
+				23BEF31E22C5A68B0089CFCA /* small_sample.tsv */,
+				23BEF32022C5AF010089CFCA /* small_sample_equal_not_equal_bom.tsv */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -573,7 +579,9 @@
 			files = (
 				23FA81AB2172A656006AC04E /* classification.csv in Resources */,
 				23FA81AA2172A656006AC04E /* korean.csv in Resources */,
+				23BEF31F22C5A68B0089CFCA /* small_sample.tsv in Resources */,
 				23FA81F92172B125006AC04E /* korean-small.csv in Resources */,
+				23BEF32122C5AF010089CFCA /* small_sample_equal_not_equal_bom.tsv in Resources */,
 				23FA81AD2172A656006AC04E /* orig.csv in Resources */,
 				23FA81AC2172A656006AC04E /* simple_csv_utf8_bom.tsv in Resources */,
 				23FA81A92172A656006AC04E /* ford_escort.csv in Resources */,

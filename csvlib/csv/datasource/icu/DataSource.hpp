@@ -77,16 +77,21 @@ namespace icu {
 
 	class FileDataSource: public DataSource {
 	public:
-		FileDataSource() noexcept {}
+		FileDataSource() noexcept
+		: _in(NULL) {
+		}
 
 		/// Throws csv::file_exception if unable to open file or determine codepage
-		FileDataSource(const std::string& file, const char* codepage) {
+		FileDataSource(const std::string& file, const char* codepage)
+		: _in(NULL) {
 			if (!open(file.c_str(), codepage)) {
 				throw csv::file_exception();
 			}
 		}
 
 		bool open(const char* file, const char* codepage);
+		void close();
+
 		virtual ~FileDataSource();
 
 	protected:

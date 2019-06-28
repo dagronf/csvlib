@@ -56,6 +56,10 @@ namespace icu {
 
 namespace icu {
 	bool FileDataSource::open(const char* file, const char* codepage) {
+
+		// Close if we have one open already
+		close();
+
 		std::string file_codepage = codepage ?: "";
 		if (file_codepage.length() == 0) {
 			const auto detected = encoding::TextEncodingForFile(file);
@@ -74,6 +78,13 @@ namespace icu {
 		}
 
 		return _in != NULL;
+	}
+
+	void FileDataSource::close() {
+		if (_in != NULL) {
+			u_fclose(_in);
+			_in = NULL;
+		}
 	}
 
 	FileDataSource::~FileDataSource() {

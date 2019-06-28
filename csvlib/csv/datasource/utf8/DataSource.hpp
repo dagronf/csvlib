@@ -80,6 +80,7 @@ private:
 class FileDataSource: public utf8::DataSource {
 public:
 	FileDataSource() noexcept {}
+	~FileDataSource();
 
 	/// Throws csv::file_exception if unable to open file
 	FileDataSource(const char* file) {
@@ -88,6 +89,7 @@ public:
 		}
 	}
 	bool open(const char* file);
+	void close();
 
 public:
 	virtual bool next();
