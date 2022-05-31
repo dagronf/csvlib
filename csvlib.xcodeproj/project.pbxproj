@@ -687,11 +687,11 @@
 				DEVELOPMENT_TEAM = 3L6RK3LGGW;
 				FRAMEWORK_SEARCH_PATHS = "../csvlib/**";
 				HEADER_SEARCH_PATHS = "../csvlib/**";
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/opt/icu4c/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/63.1/include,
+					/usr/local/opt/icu4c/include,
 					csvlib/,
 				);
 			};
@@ -704,11 +704,11 @@
 				DEVELOPMENT_TEAM = 3L6RK3LGGW;
 				FRAMEWORK_SEARCH_PATHS = "../csvlib/**";
 				HEADER_SEARCH_PATHS = "../csvlib/**";
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/opt/icu4c/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/63.1/include,
+					/usr/local/opt/icu4c/include,
 					csvlib/,
 				);
 			};
@@ -722,12 +722,16 @@
 				EXECUTABLE_PREFIX = lib;
 				FRAMEWORK_SEARCH_PATHS = "../csvlib/**";
 				HEADER_SEARCH_PATHS = "../csvlib/**";
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/opt/icu4c/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/63.1/include,
+					"$(inherited)",
+					/usr/local/opt/icu4c/include,
 					csvlib/,
 				);
 			};
@@ -741,12 +745,16 @@
 				EXECUTABLE_PREFIX = lib;
 				FRAMEWORK_SEARCH_PATHS = "../csvlib/**";
 				HEADER_SEARCH_PATHS = "../csvlib/**";
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/icu4c/63.1/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/opt/icu4c/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/63.1/include,
+					"$(inherited)",
+					/usr/local/opt/icu4c/include,
 					csvlib/,
 				);
 			};
@@ -937,7 +945,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/icu4c/63.1/lib,
+					/usr/local/opt/icu4c/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.Tabula-Rasa";
@@ -947,7 +955,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/63.1/include,
+					/usr/local/opt/icu4c/include,
 					csvlib/,
 				);
 			};
@@ -969,7 +977,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/icu4c/63.1/lib,
+					/usr/local/opt/icu4c/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenford.Tabula-Rasa";
@@ -979,7 +987,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/Cellar/icu4c/63.1/include,
+					/usr/local/opt/icu4c/include,
 					csvlib/,
 				);
 			};
